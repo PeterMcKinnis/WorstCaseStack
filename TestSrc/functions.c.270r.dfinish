@@ -1,0 +1,2585 @@
+
+;; Function static1 (static1, funcdef_no=0, decl_uid=4165, cgraph_uid=0, symbol_order=0)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 30 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 30 5 31 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:27 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 31 30 32 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:27 4 {*arm_addsi3}
+     (nil))
+(insn/f 32 31 33 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -248 [0xffffffffffffff08]))) functions.c:27 4 {*arm_addsi3}
+     (nil))
+(insn 33 32 34 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:27 293 {stack_tie}
+     (nil))
+(note 34 33 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 34 3 (set (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -248 [0xffffffffffffff08])) [0 str+0 S4 A32])
+        (reg:SI 0 r0 [ str ])) functions.c:27 172 {*arm_movsi_insn}
+     (nil))
+(insn 3 2 4 (set (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -252 [0xffffffffffffff04])) [0 len+0 S4 A32])
+        (reg:SI 1 r1 [ len ])) functions.c:27 172 {*arm_movsi_insn}
+     (nil))
+(note 4 3 50 NOTE_INSN_FUNCTION_BEG)
+(note 50 4 7 03ad6850 NOTE_INSN_BLOCK_BEG)
+(insn 7 50 8 (set (reg:SI 3 r3 [113])
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -244 [0xffffffffffffff0c]))) functions.c:28 4 {*arm_addsi3}
+     (nil))
+(insn 8 7 10 (set (reg:SI 2 r2 [114])
+        (const_int 240 [0xf0])) functions.c:28 172 {*arm_movsi_insn}
+     (nil))
+(insn 10 8 11 (set (reg:SI 1 r1)
+        (const_int 0 [0])) functions.c:28 172 {*arm_movsi_insn}
+     (nil))
+(insn 11 10 12 (set (reg:SI 0 r0)
+        (reg:SI 3 r3 [113])) functions.c:28 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 12 11 15 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("memset") [flags 0x41]  <function_decl 03afa780 memset>) [0 memset S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:28 211 {*call_value_symbol}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (expr_list:SI (use (reg:SI 2 r2))
+                    (nil))))))
+(insn 15 12 16 (set (reg:QI 3 r3 [117])
+        (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -5 [0xfffffffffffffffb])) [0 mem+239 S1 A8])) functions.c:28 182 {*arm_movqi_insn}
+     (nil))
+(insn 16 15 18 (set (reg:SI 3 r3 [orig:110 D.4322 ] [110])
+        (and:SI (reg:SI 3 r3 [117])
+            (const_int 255 [0xff]))) functions.c:28 74 {*arm_andsi3_insn}
+     (nil))
+(insn 18 16 51 (set (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -244 [0xffffffffffffff0c])) [0 mem+0 S1 A64])
+        (reg:QI 3 r3 [118])) functions.c:28 182 {*arm_movqi_insn}
+     (nil))
+(note 51 18 19 03ad6850 NOTE_INSN_BLOCK_END)
+(insn 19 51 26 (set (reg:SI 3 r3 [orig:111 D.4323 ] [111])
+        (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -252 [0xffffffffffffff04])) [0 len+0 S4 A32])) functions.c:29 172 {*arm_movsi_insn}
+     (nil))
+(insn 26 19 27 (set (reg/i:SI 0 r0)
+        (reg:SI 3 r3 [orig:112 <retval> ] [112])) functions.c:30 172 {*arm_movsi_insn}
+     (nil))
+(insn 27 26 35 (use (reg/i:SI 0 r0)) functions.c:30 -1
+     (nil))
+(note 35 27 36 NOTE_INSN_EPILOGUE_BEG)
+(insn 36 35 37 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:30 221 {blockage}
+     (nil))
+(insn/f 37 36 38 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:30 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 38 37 39 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:30 310 {force_register_use}
+     (nil))
+(insn/f 39 38 40 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:30 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 40 39 41 (simple_return) functions.c:30 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 41 40 29)
+(note 29 41 0 NOTE_INSN_DELETED)
+
+;; Function static2 (static2, funcdef_no=1, decl_uid=4168, cgraph_uid=1, symbol_order=1)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 32 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 32 5 33 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:32 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 33 32 34 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:32 4 {*arm_addsi3}
+     (nil))
+(insn/f 34 33 35 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -152 [0xffffffffffffff68]))) functions.c:32 4 {*arm_addsi3}
+     (nil))
+(insn 35 34 36 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:32 293 {stack_tie}
+     (nil))
+(note 36 35 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 36 3 (set (mem/c:SF (plus:SI (reg/f:SI 11 fp)
+                (const_int -152 [0xffffffffffffff68])) [0 a+0 S4 A32])
+        (reg:SF 0 r0 [ a ])) functions.c:32 184 {*arm_movsf_soft_insn}
+     (nil))
+(insn 3 2 4 (set (mem/c:SF (plus:SI (reg/f:SI 11 fp)
+                (const_int -156 [0xffffffffffffff64])) [0 b+0 S4 A32])
+        (reg:SF 1 r1 [ b ])) functions.c:32 184 {*arm_movsf_soft_insn}
+     (nil))
+(note 4 3 52 NOTE_INSN_FUNCTION_BEG)
+(note 52 4 7 03ad68c0 NOTE_INSN_BLOCK_BEG)
+(insn 7 52 8 (set (reg:SI 3 r3 [113])
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -144 [0xffffffffffffff70]))) functions.c:33 4 {*arm_addsi3}
+     (nil))
+(insn 8 7 10 (set (reg:SI 2 r2 [114])
+        (const_int 140 [0x8c])) functions.c:33 172 {*arm_movsi_insn}
+     (nil))
+(insn 10 8 11 (set (reg:SI 1 r1)
+        (const_int 0 [0])) functions.c:33 172 {*arm_movsi_insn}
+     (nil))
+(insn 11 10 12 (set (reg:SI 0 r0)
+        (reg:SI 3 r3 [113])) functions.c:33 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 12 11 15 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("memset") [flags 0x41]  <function_decl 03afa780 memset>) [0 memset S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:33 211 {*call_value_symbol}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (expr_list:SI (use (reg:SI 2 r2))
+                    (nil))))))
+(insn 15 12 16 (set (reg:QI 3 r3 [117])
+        (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -5 [0xfffffffffffffffb])) [0 mem+139 S1 A8])) functions.c:33 182 {*arm_movqi_insn}
+     (nil))
+(insn 16 15 18 (set (reg:SI 3 r3 [orig:110 D.4327 ] [110])
+        (and:SI (reg:SI 3 r3 [117])
+            (const_int 255 [0xff]))) functions.c:33 74 {*arm_andsi3_insn}
+     (nil))
+(insn 18 16 53 (set (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -144 [0xffffffffffffff70])) [0 mem+0 S1 A32])
+        (reg:QI 3 r3 [118])) functions.c:33 182 {*arm_movqi_insn}
+     (nil))
+(note 53 18 19 03ad68c0 NOTE_INSN_BLOCK_END)
+(insn 19 53 20 (set (reg:SF 0 r0)
+        (mem/c:SF (plus:SI (reg/f:SI 11 fp)
+                (const_int -156 [0xffffffffffffff64])) [0 b+0 S4 A32])) functions.c:34 184 {*arm_movsf_soft_insn}
+     (nil))
+(call_insn/u 20 19 21 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("__aeabi_f2iz") [flags 0x41]) [0  S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:34 211 {*call_value_symbol}
+     (expr_list:REG_EH_REGION (const_int -2147483648 [0xffffffff80000000])
+        (nil))
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list (use (reg:SF 0 r0))
+            (nil))))
+(insn 21 20 28 (set (reg:SI 3 r3 [orig:111 D.4328 ] [111])
+        (reg:SI 0 r0)) functions.c:34 172 {*arm_movsi_insn}
+     (expr_list:REG_EQUAL (fix:SI (mem/c:SF (plus:SI (reg/f:SI 102 sfp)
+                    (const_int -152 [0xffffffffffffff68])) [0 b+0 S4 A32]))
+        (nil)))
+(insn 28 21 29 (set (reg/i:SI 0 r0)
+        (reg:SI 3 r3 [orig:112 <retval> ] [112])) functions.c:35 172 {*arm_movsi_insn}
+     (nil))
+(insn 29 28 37 (use (reg/i:SI 0 r0)) functions.c:35 -1
+     (nil))
+(note 37 29 38 NOTE_INSN_EPILOGUE_BEG)
+(insn 38 37 39 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:35 221 {blockage}
+     (nil))
+(insn/f 39 38 40 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:35 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 40 39 41 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:35 310 {force_register_use}
+     (nil))
+(insn/f 41 40 42 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:35 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 42 41 43 (simple_return) functions.c:35 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 43 42 31)
+(note 31 43 0 NOTE_INSN_DELETED)
+
+;; Function static3 (static3, funcdef_no=2, decl_uid=4170, cgraph_uid=2, symbol_order=2)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 16 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 16 4 17 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:37 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 17 16 18 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:37 4 {*arm_addsi3}
+     (nil))
+(insn/f 18 17 19 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -8 [0xfffffffffffffff8]))) functions.c:37 4 {*arm_addsi3}
+     (nil))
+(insn 19 18 20 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:37 293 {stack_tie}
+     (nil))
+(note 20 19 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 20 3 (set (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])
+        (reg:SI 0 r0 [ a ])) functions.c:37 172 {*arm_movsi_insn}
+     (nil))
+(note 3 2 6 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 (set (reg:SI 1 r1)
+        (const_int 2 [0x2])) functions.c:38 172 {*arm_movsi_insn}
+     (nil))
+(insn 7 6 8 (set (reg:SI 0 r0)
+        (mem:SI (label_ref 33) [0  S4 A32])) functions.c:38 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 8 7 28 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("static1") [flags 0x3]  <function_decl 03ac7100 static1>) [0 static1 S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:38 211 {*call_value_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (nil)))))
+(insn 28 8 30 (set (reg:SI 1 r1)
+        (mem:SI (const:SI (plus:SI (label_ref 33)
+                    (const_int 4 [0x4]))) [0  S4 A32])) functions.c:39 172 {*arm_movsi_insn}
+     (nil))
+(insn 30 28 11 (set (reg:SI 0 r0)
+        (const_int 1069547520 [0x3fc00000])) functions.c:39 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 11 30 14 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("static2") [flags 0x3]  <function_decl 03ac7180 static2>) [0 static2 S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:39 211 {*call_value_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SF (use (reg:SF 0 r0))
+            (expr_list:SF (use (reg:SF 1 r1))
+                (nil)))))
+(insn 14 11 21 (const_int 0 [0]) functions.c:40 225 {nop}
+     (nil))
+(note 21 14 22 NOTE_INSN_EPILOGUE_BEG)
+(insn 22 21 23 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:40 221 {blockage}
+     (nil))
+(insn/f 23 22 24 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:40 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 24 23 25 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:40 310 {force_register_use}
+     (nil))
+(insn/f 25 24 26 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:40 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 26 25 27 (simple_return) functions.c:40 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 27 26 31)
+(code_label 31 27 32 7 "" [0 uses])
+(insn 32 31 33 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_ALIGN) 299 {align_4}
+     (nil))
+(code_label 33 32 34 6 "" [0 uses])
+(insn 34 33 35 (unspec_volatile [
+            (symbol_ref/f:SI ("*.LC0") [flags 0x2]  <var_decl 03ae1790 *.LC0>)
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 35 34 36 (unspec_volatile [
+            (const_int 1080033280 [0x40600000])
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 36 35 37 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_POOL_END) 301 {consttable_end}
+     (nil))
+(barrier 37 36 15)
+(note 15 37 0 NOTE_INSN_DELETED)
+
+;; Function static4 (static4, funcdef_no=3, decl_uid=4172, cgraph_uid=3, symbol_order=3)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 18 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 18 4 19 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:42 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 19 18 20 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:42 4 {*arm_addsi3}
+     (nil))
+(insn/f 20 19 21 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -8 [0xfffffffffffffff8]))) functions.c:42 4 {*arm_addsi3}
+     (nil))
+(insn 21 20 22 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:42 293 {stack_tie}
+     (nil))
+(note 22 21 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 22 3 (set (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])
+        (reg:SI 0 r0 [ a ])) functions.c:42 172 {*arm_movsi_insn}
+     (nil))
+(note 3 2 6 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 (set (reg:SI 1 r1)
+        (const_int 2 [0x2])) functions.c:43 172 {*arm_movsi_insn}
+     (nil))
+(insn 7 6 8 (set (reg:SI 0 r0)
+        (mem:SI (label_ref 35) [0  S4 A32])) functions.c:43 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 8 7 30 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("static1") [flags 0x3]  <function_decl 03ac7100 static1>) [0 static1 S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:43 211 {*call_value_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (nil)))))
+(insn 30 8 32 (set (reg:SI 1 r1)
+        (mem:SI (const:SI (plus:SI (label_ref 35)
+                    (const_int 4 [0x4]))) [0  S4 A32])) functions.c:44 172 {*arm_movsi_insn}
+     (nil))
+(insn 32 30 11 (set (reg:SI 0 r0)
+        (const_int 1069547520 [0x3fc00000])) functions.c:44 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 11 32 12 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("static2") [flags 0x3]  <function_decl 03ac7180 static2>) [0 static2 S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:44 211 {*call_value_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SF (use (reg:SF 0 r0))
+            (expr_list:SF (use (reg:SF 1 r1))
+                (nil)))))
+(insn 12 11 13 (set (reg:SI 0 r0)
+        (const_int 5 [0x5])) functions.c:45 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 13 12 16 (parallel [
+            (call (mem:SI (symbol_ref:SI ("static3") [flags 0x3]  <function_decl 03ac7200 static3>) [0 static3 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:45 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (nil))))
+(insn 16 13 23 (const_int 0 [0]) functions.c:46 225 {nop}
+     (nil))
+(note 23 16 24 NOTE_INSN_EPILOGUE_BEG)
+(insn 24 23 25 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:46 221 {blockage}
+     (nil))
+(insn/f 25 24 26 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:46 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 26 25 27 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:46 310 {force_register_use}
+     (nil))
+(insn/f 27 26 28 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:46 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 28 27 29 (simple_return) functions.c:46 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 29 28 33)
+(code_label 33 29 34 10 "" [0 uses])
+(insn 34 33 35 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_ALIGN) 299 {align_4}
+     (nil))
+(code_label 35 34 36 9 "" [0 uses])
+(insn 36 35 37 (unspec_volatile [
+            (symbol_ref/f:SI ("*.LC0") [flags 0x2]  <var_decl 03ae1790 *.LC0>)
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 37 36 38 (unspec_volatile [
+            (const_int 1080033280 [0x40600000])
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 38 37 39 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_POOL_END) 301 {consttable_end}
+     (nil))
+(barrier 39 38 17)
+(note 17 39 0 NOTE_INSN_DELETED)
+
+;; Function static5 (static5, funcdef_no=4, decl_uid=4174, cgraph_uid=4, symbol_order=4)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 16 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 16 4 17 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:48 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 17 16 18 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:48 4 {*arm_addsi3}
+     (nil))
+(insn/f 18 17 19 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -8 [0xfffffffffffffff8]))) functions.c:48 4 {*arm_addsi3}
+     (nil))
+(insn 19 18 20 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:48 293 {stack_tie}
+     (nil))
+(note 20 19 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 20 3 (set (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])
+        (reg:SI 0 r0 [ a ])) functions.c:48 172 {*arm_movsi_insn}
+     (nil))
+(note 3 2 6 NOTE_INSN_FUNCTION_BEG)
+(call_insn 6 3 7 (parallel [
+            (call (mem:SI (symbol_ref:SI ("extern_prv_fxn1") [flags 0x41]  <function_decl 03ac7880 extern_prv_fxn1>) [0 extern_prv_fxn1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:49 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(call_insn 7 6 10 (parallel [
+            (call (mem:SI (symbol_ref:SI ("extern_prv_fxn1") [flags 0x41]  <function_decl 03ac7880 extern_prv_fxn1>) [0 extern_prv_fxn1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:50 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 10 7 11 (clobber (reg/i:SI 0 r0)) functions.c:51 -1
+     (nil))
+(insn 11 10 14 (clobber (reg:SI 3 r3 [orig:110 <retval> ] [110])) functions.c:51 -1
+     (nil))
+(insn 14 11 9 (const_int 0 [0]) functions.c:51 225 {nop}
+     (nil))
+(insn 9 14 12 (set (reg/i:SI 0 r0)
+        (reg:SI 3 r3 [orig:110 <retval> ] [110])) functions.c:51 172 {*arm_movsi_insn}
+     (nil))
+(insn 12 9 21 (use (reg/i:SI 0 r0)) functions.c:51 -1
+     (nil))
+(note 21 12 22 NOTE_INSN_EPILOGUE_BEG)
+(insn 22 21 23 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:51 221 {blockage}
+     (nil))
+(insn/f 23 22 24 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:51 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 24 23 25 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:51 310 {force_register_use}
+     (nil))
+(insn/f 25 24 26 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:51 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 26 25 27 (simple_return) functions.c:51 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 27 26 15)
+(note 15 27 0 NOTE_INSN_DELETED)
+
+;; Function recursive1 (recursive1, funcdef_no=5, decl_uid=4176, cgraph_uid=5, symbol_order=5)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 22 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 22 3 23 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:54 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 23 22 24 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:54 4 {*arm_addsi3}
+     (nil))
+(insn/f 24 23 25 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -40 [0xffffffffffffffd8]))) functions.c:54 4 {*arm_addsi3}
+     (nil))
+(insn 25 24 26 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:54 293 {stack_tie}
+     (nil))
+(note 26 25 2 NOTE_INSN_PROLOGUE_END)
+(note 2 26 42 NOTE_INSN_FUNCTION_BEG)
+(note 42 2 5 03ad69d8 NOTE_INSN_BLOCK_BEG)
+(insn 5 42 6 (set (reg:SI 3 r3 [111])
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -44 [0xffffffffffffffd4]))) functions.c:55 4 {*arm_addsi3}
+     (nil))
+(insn 6 5 8 (set (reg:SI 2 r2 [112])
+        (const_int 40 [0x28])) functions.c:55 172 {*arm_movsi_insn}
+     (nil))
+(insn 8 6 9 (set (reg:SI 1 r1)
+        (const_int 0 [0])) functions.c:55 172 {*arm_movsi_insn}
+     (nil))
+(insn 9 8 10 (set (reg:SI 0 r0)
+        (reg:SI 3 r3 [111])) functions.c:55 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 10 9 13 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("memset") [flags 0x41]  <function_decl 03afa780 memset>) [0 memset S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:55 211 {*call_value_symbol}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (expr_list:SI (use (reg:SI 2 r2))
+                    (nil))))))
+(insn 13 10 14 (set (reg:QI 3 r3 [115])
+        (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -5 [0xfffffffffffffffb])) [0 mem+39 S1 A8])) functions.c:55 182 {*arm_movqi_insn}
+     (nil))
+(insn 14 13 16 (set (reg:SI 3 r3 [orig:110 D.4332 ] [110])
+        (and:SI (reg:SI 3 r3 [115])
+            (const_int 255 [0xff]))) functions.c:55 74 {*arm_andsi3_insn}
+     (nil))
+(insn 16 14 43 (set (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -44 [0xffffffffffffffd4])) [0 mem+0 S1 A64])
+        (reg:QI 3 r3 [116])) functions.c:55 182 {*arm_movqi_insn}
+     (nil))
+(note 43 16 17 03ad69d8 NOTE_INSN_BLOCK_END)
+(call_insn 17 43 20 (parallel [
+            (call (mem:SI (symbol_ref:SI ("recursive1") [flags 0x3]  <function_decl 03ac7380 recursive1>) [0 recursive1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:56 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 20 17 27 (const_int 0 [0]) functions.c:57 225 {nop}
+     (nil))
+(note 27 20 28 NOTE_INSN_EPILOGUE_BEG)
+(insn 28 27 29 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:57 221 {blockage}
+     (nil))
+(insn/f 29 28 30 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:57 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 30 29 31 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:57 310 {force_register_use}
+     (nil))
+(insn/f 31 30 32 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:57 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 32 31 33 (simple_return) functions.c:57 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 33 32 21)
+(note 21 33 0 NOTE_INSN_DELETED)
+
+;; Function recursive2a (recursive2a, funcdef_no=6, decl_uid=4178, cgraph_uid=6, symbol_order=6)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 19 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 19 3 20 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:59 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 20 19 21 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:59 4 {*arm_addsi3}
+     (nil))
+(insn/f 21 20 22 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -8 [0xfffffffffffffff8]))) functions.c:59 4 {*arm_addsi3}
+     (nil))
+(insn 22 21 23 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:59 293 {stack_tie}
+     (nil))
+(note 23 22 2 NOTE_INSN_PROLOGUE_END)
+(note 2 23 39 NOTE_INSN_FUNCTION_BEG)
+(note 39 2 5 03ad6a48 NOTE_INSN_BLOCK_BEG)
+(insn 5 39 6 (set (reg:SI 3 r3 [111])
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -12 [0xfffffffffffffff4]))) functions.c:60 4 {*arm_addsi3}
+     (nil))
+(insn 6 5 7 (set (reg:SI 2 r2 [112])
+        (const_int 0 [0])) functions.c:60 172 {*arm_movsi_insn}
+     (nil))
+(insn 7 6 8 (set (mem/v/c:SI (reg:SI 3 r3 [111]) [0 mem+0 S4 A64])
+        (reg:SI 2 r2 [112])) functions.c:60 172 {*arm_movsi_insn}
+     (nil))
+(insn 8 7 10 (set (mem/v/c:SI (plus:SI (reg:SI 3 r3 [111])
+                (const_int 4 [0x4])) [0 mem+4 S4 A32])
+        (reg:SI 2 r2 [112])) functions.c:60 172 {*arm_movsi_insn}
+     (nil))
+(insn 10 8 11 (set (reg:QI 3 r3 [114])
+        (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -5 [0xfffffffffffffffb])) [0 mem+7 S1 A8])) functions.c:60 182 {*arm_movqi_insn}
+     (nil))
+(insn 11 10 13 (set (reg:SI 3 r3 [orig:110 D.4335 ] [110])
+        (and:SI (reg:SI 3 r3 [114])
+            (const_int 255 [0xff]))) functions.c:60 74 {*arm_andsi3_insn}
+     (nil))
+(insn 13 11 40 (set (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -12 [0xfffffffffffffff4])) [0 mem+0 S1 A64])
+        (reg:QI 3 r3 [115])) functions.c:60 182 {*arm_movqi_insn}
+     (nil))
+(note 40 13 14 03ad6a48 NOTE_INSN_BLOCK_END)
+(call_insn 14 40 17 (parallel [
+            (call (mem:SI (symbol_ref:SI ("recursive2b") [flags 0x3]  <function_decl 03ac7480 recursive2b>) [0 recursive2b S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:61 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 17 14 24 (const_int 0 [0]) functions.c:62 225 {nop}
+     (nil))
+(note 24 17 25 NOTE_INSN_EPILOGUE_BEG)
+(insn 25 24 26 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:62 221 {blockage}
+     (nil))
+(insn/f 26 25 27 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:62 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 27 26 28 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:62 310 {force_register_use}
+     (nil))
+(insn/f 28 27 29 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:62 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 29 28 30 (simple_return) functions.c:62 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 30 29 18)
+(note 18 30 0 NOTE_INSN_DELETED)
+
+;; Function recursive2b (recursive2b, funcdef_no=7, decl_uid=4180, cgraph_uid=7, symbol_order=7)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 22 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 22 3 23 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:64 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 23 22 24 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:64 4 {*arm_addsi3}
+     (nil))
+(insn/f 24 23 25 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -144 [0xffffffffffffff70]))) functions.c:64 4 {*arm_addsi3}
+     (nil))
+(insn 25 24 26 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:64 293 {stack_tie}
+     (nil))
+(note 26 25 2 NOTE_INSN_PROLOGUE_END)
+(note 2 26 42 NOTE_INSN_FUNCTION_BEG)
+(note 42 2 5 03ad6ab8 NOTE_INSN_BLOCK_BEG)
+(insn 5 42 6 (set (reg:SI 3 r3 [111])
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -148 [0xffffffffffffff6c]))) functions.c:65 4 {*arm_addsi3}
+     (nil))
+(insn 6 5 8 (set (reg:SI 2 r2 [112])
+        (const_int 144 [0x90])) functions.c:65 172 {*arm_movsi_insn}
+     (nil))
+(insn 8 6 9 (set (reg:SI 1 r1)
+        (const_int 0 [0])) functions.c:65 172 {*arm_movsi_insn}
+     (nil))
+(insn 9 8 10 (set (reg:SI 0 r0)
+        (reg:SI 3 r3 [111])) functions.c:65 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 10 9 13 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("memset") [flags 0x41]  <function_decl 03afa780 memset>) [0 memset S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:65 211 {*call_value_symbol}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (expr_list:SI (use (reg:SI 2 r2))
+                    (nil))))))
+(insn 13 10 14 (set (reg:QI 3 r3 [115])
+        (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -5 [0xfffffffffffffffb])) [0 mem+143 S1 A8])) functions.c:65 182 {*arm_movqi_insn}
+     (nil))
+(insn 14 13 16 (set (reg:SI 3 r3 [orig:110 D.4336 ] [110])
+        (and:SI (reg:SI 3 r3 [115])
+            (const_int 255 [0xff]))) functions.c:65 74 {*arm_andsi3_insn}
+     (nil))
+(insn 16 14 43 (set (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -148 [0xffffffffffffff6c])) [0 mem+0 S1 A64])
+        (reg:QI 3 r3 [116])) functions.c:65 182 {*arm_movqi_insn}
+     (nil))
+(note 43 16 17 03ad6ab8 NOTE_INSN_BLOCK_END)
+(call_insn 17 43 20 (parallel [
+            (call (mem:SI (symbol_ref:SI ("recursive2c") [flags 0x3]  <function_decl 03ac7500 recursive2c>) [0 recursive2c S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:66 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 20 17 27 (const_int 0 [0]) functions.c:67 225 {nop}
+     (nil))
+(note 27 20 28 NOTE_INSN_EPILOGUE_BEG)
+(insn 28 27 29 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:67 221 {blockage}
+     (nil))
+(insn/f 29 28 30 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:67 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 30 29 31 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:67 310 {force_register_use}
+     (nil))
+(insn/f 31 30 32 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:67 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 32 31 33 (simple_return) functions.c:67 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 33 32 21)
+(note 21 33 0 NOTE_INSN_DELETED)
+
+;; Function recursive2c (recursive2c, funcdef_no=8, decl_uid=4182, cgraph_uid=8, symbol_order=8)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 23 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 23 3 24 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:69 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 24 23 25 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:69 4 {*arm_addsi3}
+     (nil))
+(insn/f 25 24 26 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -992 [0xfffffffffffffc20]))) functions.c:69 4 {*arm_addsi3}
+     (nil))
+(insn 26 25 27 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:69 293 {stack_tie}
+     (nil))
+(note 27 26 2 NOTE_INSN_PROLOGUE_END)
+(note 2 27 50 NOTE_INSN_FUNCTION_BEG)
+(note 50 2 5 03ad6b28 NOTE_INSN_BLOCK_BEG)
+(insn 5 50 6 (set (reg:SI 3 r3 [111])
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -996 [0xfffffffffffffc1c]))) functions.c:70 4 {*arm_addsi3}
+     (nil))
+(insn 6 5 8 (set (reg:SI 2 r2 [112])
+        (mem:SI (label_ref 38) [0  S4 A32])) functions.c:70 172 {*arm_movsi_insn}
+     (nil))
+(insn 8 6 9 (set (reg:SI 1 r1)
+        (const_int 0 [0])) functions.c:70 172 {*arm_movsi_insn}
+     (nil))
+(insn 9 8 10 (set (reg:SI 0 r0)
+        (reg:SI 3 r3 [111])) functions.c:70 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 10 9 13 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("memset") [flags 0x41]  <function_decl 03afa780 memset>) [0 memset S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:70 211 {*call_value_symbol}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (expr_list:SI (use (reg:SI 2 r2))
+                    (nil))))))
+(insn 13 10 14 (set (reg:QI 3 r3 [115])
+        (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -7 [0xfffffffffffffff9])) [0 mem+989 S1 A8])) functions.c:70 182 {*arm_movqi_insn}
+     (nil))
+(insn 14 13 16 (set (reg:SI 3 r3 [orig:110 D.4339 ] [110])
+        (and:SI (reg:SI 3 r3 [115])
+            (const_int 255 [0xff]))) functions.c:70 74 {*arm_andsi3_insn}
+     (nil))
+(insn 16 14 51 (set (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -996 [0xfffffffffffffc1c])) [0 mem+0 S1 A64])
+        (reg:QI 3 r3 [116])) functions.c:70 182 {*arm_movqi_insn}
+     (nil))
+(note 51 16 17 03ad6b28 NOTE_INSN_BLOCK_END)
+(call_insn 17 51 20 (parallel [
+            (call (mem:SI (symbol_ref:SI ("recursive2d") [flags 0x3]  <function_decl 03ac7580 recursive2d>) [0 recursive2d S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:71 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 20 17 28 (const_int 0 [0]) functions.c:72 225 {nop}
+     (nil))
+(note 28 20 29 NOTE_INSN_EPILOGUE_BEG)
+(insn 29 28 30 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:72 221 {blockage}
+     (nil))
+(insn/f 30 29 31 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:72 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 31 30 32 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:72 310 {force_register_use}
+     (nil))
+(insn/f 32 31 33 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:72 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 33 32 34 (simple_return) functions.c:72 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 34 33 36)
+(code_label 36 34 37 17 "" [0 uses])
+(insn 37 36 38 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_ALIGN) 299 {align_4}
+     (nil))
+(code_label 38 37 39 16 "" [0 uses])
+(insn 39 38 40 (unspec_volatile [
+            (const_int 990 [0x3de])
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 40 39 41 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_POOL_END) 301 {consttable_end}
+     (nil))
+(barrier 41 40 22)
+(note 22 41 0 NOTE_INSN_DELETED)
+
+;; Function recursive2d (recursive2d, funcdef_no=9, decl_uid=4184, cgraph_uid=9, symbol_order=9)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 22 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 22 3 23 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:74 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 23 22 24 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:74 4 {*arm_addsi3}
+     (nil))
+(insn/f 24 23 25 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -120 [0xffffffffffffff88]))) functions.c:74 4 {*arm_addsi3}
+     (nil))
+(insn 25 24 26 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:74 293 {stack_tie}
+     (nil))
+(note 26 25 2 NOTE_INSN_PROLOGUE_END)
+(note 2 26 42 NOTE_INSN_FUNCTION_BEG)
+(note 42 2 5 03ad6b98 NOTE_INSN_BLOCK_BEG)
+(insn 5 42 6 (set (reg:SI 3 r3 [111])
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -124 [0xffffffffffffff84]))) functions.c:75 4 {*arm_addsi3}
+     (nil))
+(insn 6 5 8 (set (reg:SI 2 r2 [112])
+        (const_int 120 [0x78])) functions.c:75 172 {*arm_movsi_insn}
+     (nil))
+(insn 8 6 9 (set (reg:SI 1 r1)
+        (const_int 0 [0])) functions.c:75 172 {*arm_movsi_insn}
+     (nil))
+(insn 9 8 10 (set (reg:SI 0 r0)
+        (reg:SI 3 r3 [111])) functions.c:75 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 10 9 13 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("memset") [flags 0x41]  <function_decl 03afa780 memset>) [0 memset S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:75 211 {*call_value_symbol}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (expr_list:SI (use (reg:SI 2 r2))
+                    (nil))))))
+(insn 13 10 14 (set (reg:QI 3 r3 [115])
+        (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -5 [0xfffffffffffffffb])) [0 mem+119 S1 A8])) functions.c:75 182 {*arm_movqi_insn}
+     (nil))
+(insn 14 13 16 (set (reg:SI 3 r3 [orig:110 D.4342 ] [110])
+        (and:SI (reg:SI 3 r3 [115])
+            (const_int 255 [0xff]))) functions.c:75 74 {*arm_andsi3_insn}
+     (nil))
+(insn 16 14 43 (set (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -124 [0xffffffffffffff84])) [0 mem+0 S1 A64])
+        (reg:QI 3 r3 [116])) functions.c:75 182 {*arm_movqi_insn}
+     (nil))
+(note 43 16 17 03ad6b98 NOTE_INSN_BLOCK_END)
+(call_insn 17 43 20 (parallel [
+            (call (mem:SI (symbol_ref:SI ("recursive2a") [flags 0x3]  <function_decl 03ac7400 recursive2a>) [0 recursive2a S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:76 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 20 17 27 (const_int 0 [0]) functions.c:77 225 {nop}
+     (nil))
+(note 27 20 28 NOTE_INSN_EPILOGUE_BEG)
+(insn 28 27 29 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:77 221 {blockage}
+     (nil))
+(insn/f 29 28 30 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:77 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 30 29 31 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:77 310 {force_register_use}
+     (nil))
+(insn/f 31 30 32 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:77 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 32 31 33 (simple_return) functions.c:77 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 33 32 21)
+(note 21 33 0 NOTE_INSN_DELETED)
+
+;; Function indirect1 (indirect1, funcdef_no=10, decl_uid=4186, cgraph_uid=10, symbol_order=10)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 29 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 29 4 30 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:84 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 30 29 31 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:84 4 {*arm_addsi3}
+     (nil))
+(insn/f 31 30 32 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -16 [0xfffffffffffffff0]))) functions.c:84 4 {*arm_addsi3}
+     (nil))
+(insn 32 31 33 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:84 293 {stack_tie}
+     (nil))
+(note 33 32 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 33 3 (set (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -16 [0xfffffffffffffff0])) [0 i+0 S4 A32])
+        (reg:SI 0 r0 [ i ])) functions.c:84 172 {*arm_movsi_insn}
+     (nil))
+(note 3 2 6 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 (set (reg:SI 3 r3 [110])
+        (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -16 [0xfffffffffffffff0])) [0 i+0 S4 A32])) functions.c:89 172 {*arm_movsi_insn}
+     (nil))
+(insn 7 6 8 (set (reg:CC 100 cc)
+        (compare:CC (reg:SI 3 r3 [110])
+            (const_int 0 [0]))) functions.c:89 186 {*arm_cmpsi_insn}
+     (nil))
+(jump_insn 8 7 9 (set (pc)
+        (if_then_else (eq (reg:CC 100 cc)
+                (const_int 0 [0]))
+            (label_ref 14)
+            (pc))) functions.c:89 194 {arm_cond_branch}
+     (nil)
+ -> 14)
+(note 9 8 10 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 10 9 11 (set (reg/f:SI 3 r3 [111])
+        (mem:SI (label_ref 43) [0  S4 A32])) functions.c:90 172 {*arm_movsi_insn}
+     (nil))
+(insn 11 10 26 (set (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])
+        (reg/f:SI 3 r3 [111])) functions.c:90 172 {*arm_movsi_insn}
+     (nil))
+(jump_insn 26 11 27 (set (pc)
+        (label_ref 18)) 203 {*arm_jump}
+     (nil)
+ -> 18)
+(barrier 27 26 14)
+(code_label 14 27 15 20 "" [1 uses])
+(note 15 14 16 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 16 15 17 (set (reg/f:SI 3 r3 [112])
+        (mem:SI (const:SI (plus:SI (label_ref 43)
+                    (const_int 4 [0x4]))) [0  S4 A32])) functions.c:93 172 {*arm_movsi_insn}
+     (nil))
+(insn 17 16 18 (set (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])
+        (reg/f:SI 3 r3 [112])) functions.c:93 172 {*arm_movsi_insn}
+     (nil))
+(code_label 18 17 19 21 "" [1 uses])
+(note 19 18 20 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 20 19 21 (set (reg/f:SI 3 r3 [113])
+        (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])) functions.c:96 172 {*arm_movsi_insn}
+     (nil))
+(insn 21 20 22 (set (reg:SI 0 r0)
+        (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -16 [0xfffffffffffffff0])) [0 i+0 S4 A32])) functions.c:96 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 22 21 25 (parallel [
+            (call (mem:SI (reg/f:SI 3 r3 [113]) [0 *a_1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:96 205 {*call_reg_arm}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (nil))))
+(insn 25 22 34 (const_int 0 [0]) functions.c:98 225 {nop}
+     (nil))
+(note 34 25 35 NOTE_INSN_EPILOGUE_BEG)
+(insn 35 34 36 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:98 221 {blockage}
+     (nil))
+(insn/f 36 35 37 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:98 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 37 36 38 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:98 310 {force_register_use}
+     (nil))
+(insn/f 38 37 39 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:98 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 39 38 40 (simple_return) functions.c:98 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 40 39 41)
+(code_label 41 40 42 23 "" [0 uses])
+(insn 42 41 43 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_ALIGN) 299 {align_4}
+     (nil))
+(code_label 43 42 44 22 "" [0 uses])
+(insn 44 43 45 (unspec_volatile [
+            (symbol_ref:SI ("static3") [flags 0x3]  <function_decl 03ac7200 static3>)
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 45 44 46 (unspec_volatile [
+            (symbol_ref:SI ("static4") [flags 0x3]  <function_decl 03ac7280 static4>)
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 46 45 47 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_POOL_END) 301 {consttable_end}
+     (nil))
+(barrier 47 46 28)
+(note 28 47 0 NOTE_INSN_DELETED)
+
+;; Function indirect2 (indirect2, funcdef_no=11, decl_uid=4188, cgraph_uid=11, symbol_order=11)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 16 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 16 3 17 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:100 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 17 16 18 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:100 4 {*arm_addsi3}
+     (nil))
+(insn/f 18 17 19 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -8 [0xfffffffffffffff8]))) functions.c:100 4 {*arm_addsi3}
+     (nil))
+(insn 19 18 20 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:100 293 {stack_tie}
+     (nil))
+(note 20 19 2 NOTE_INSN_PROLOGUE_END)
+(note 2 20 5 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 (set (reg:SI 3 r3 [110])
+        (mem:SI (label_ref 31) [0  S4 A32])) functions.c:103 172 {*arm_movsi_insn}
+     (nil))
+(insn 6 5 7 (set (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 x+0 S4 A32])
+        (reg:SI 3 r3 [110])) functions.c:103 172 {*arm_movsi_insn}
+     (nil))
+(insn 7 6 8 (set (reg:SI 3 r3 [111])
+        (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 x+0 S4 A32])) functions.c:104 172 {*arm_movsi_insn}
+     (nil))
+(insn 8 7 9 (set (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -12 [0xfffffffffffffff4])) [0 a+0 S4 A32])
+        (reg:SI 3 r3 [111])) functions.c:104 172 {*arm_movsi_insn}
+     (nil))
+(insn 9 8 10 (set (reg/f:SI 3 r3 [112])
+        (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -12 [0xfffffffffffffff4])) [0 a+0 S4 A32])) functions.c:105 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 10 9 13 (parallel [
+            (call (mem:SI (reg/f:SI 3 r3 [112]) [0 *a_2 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:105 205 {*call_reg_arm}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 13 10 21 (const_int 0 [0]) functions.c:107 225 {nop}
+     (nil))
+(note 21 13 22 NOTE_INSN_EPILOGUE_BEG)
+(insn 22 21 23 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:107 221 {blockage}
+     (nil))
+(insn/f 23 22 24 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:107 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 24 23 25 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:107 310 {force_register_use}
+     (nil))
+(insn/f 25 24 26 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:107 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 26 25 27 (simple_return) functions.c:107 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 27 26 29)
+(code_label 29 27 30 26 "" [0 uses])
+(insn 30 29 31 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_ALIGN) 299 {align_4}
+     (nil))
+(code_label 31 30 32 25 "" [0 uses])
+(insn 32 31 33 (unspec_volatile [
+            (const_int 4613 [0x1205])
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 33 32 34 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_POOL_END) 301 {consttable_end}
+     (nil))
+(barrier 34 33 15)
+(note 15 34 0 NOTE_INSN_DELETED)
+
+;; Function indirect3 (indirect3, funcdef_no=12, decl_uid=4191, cgraph_uid=12, symbol_order=12)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 34 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 34 5 35 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:109 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 35 34 36 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:109 4 {*arm_addsi3}
+     (nil))
+(insn/f 36 35 37 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -16 [0xfffffffffffffff0]))) functions.c:109 4 {*arm_addsi3}
+     (nil))
+(insn 37 36 38 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:109 293 {stack_tie}
+     (nil))
+(note 38 37 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 38 3 (set (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -16 [0xfffffffffffffff0])) [0 i+0 S4 A32])
+        (reg:SI 0 r0 [ i ])) functions.c:109 172 {*arm_movsi_insn}
+     (nil))
+(insn 3 2 4 (set (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -20 [0xffffffffffffffec])) [0 offset+0 S4 A32])
+        (reg:SI 1 r1 [ offset ])) functions.c:109 172 {*arm_movsi_insn}
+     (nil))
+(note 4 3 7 NOTE_INSN_FUNCTION_BEG)
+(insn 7 4 8 (set (reg:SI 3 r3 [111])
+        (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])) functions.c:114 172 {*arm_movsi_insn}
+     (nil))
+(insn 8 7 9 (set (reg:CC 100 cc)
+        (compare:CC (reg:SI 3 r3 [111])
+            (const_int 0 [0]))) functions.c:114 186 {*arm_cmpsi_insn}
+     (nil))
+(jump_insn 9 8 10 (set (pc)
+        (if_then_else (eq (reg:CC 100 cc)
+                (const_int 0 [0]))
+            (label_ref 15)
+            (pc))) functions.c:114 194 {arm_cond_branch}
+     (nil)
+ -> 15)
+(note 10 9 11 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 11 10 12 (set (reg/f:SI 3 r3 [112])
+        (mem:SI (label_ref 48) [0  S4 A32])) functions.c:115 172 {*arm_movsi_insn}
+     (nil))
+(insn 12 11 31 (set (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])
+        (reg/f:SI 3 r3 [112])) functions.c:115 172 {*arm_movsi_insn}
+     (nil))
+(jump_insn 31 12 32 (set (pc)
+        (label_ref 19)) 203 {*arm_jump}
+     (nil)
+ -> 19)
+(barrier 32 31 15)
+(code_label 15 32 16 28 "" [1 uses])
+(note 16 15 17 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 17 16 18 (set (reg/f:SI 3 r3 [113])
+        (mem:SI (const:SI (plus:SI (label_ref 48)
+                    (const_int 4 [0x4]))) [0  S4 A32])) functions.c:118 172 {*arm_movsi_insn}
+     (nil))
+(insn 18 17 19 (set (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])
+        (reg/f:SI 3 r3 [113])) functions.c:118 172 {*arm_movsi_insn}
+     (nil))
+(code_label 19 18 20 29 "" [1 uses])
+(note 20 19 21 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 21 20 22 (set (reg:SI 3 r3 [orig:110 D.4345 ] [110])
+        (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -20 [0xffffffffffffffec])) [0 offset+0 S4 A32])) functions.c:121 172 {*arm_movsi_insn}
+     (nil))
+(insn 22 21 23 (set (reg:SI 2 r2 [115])
+        (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])) functions.c:121 172 {*arm_movsi_insn}
+     (nil))
+(insn 23 22 24 (set (reg:SI 3 r3 [114])
+        (plus:SI (reg:SI 2 r2 [115])
+            (reg:SI 3 r3 [orig:110 D.4345 ] [110]))) functions.c:121 4 {*arm_addsi3}
+     (nil))
+(insn 24 23 25 (set (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])
+        (reg:SI 3 r3 [114])) functions.c:121 172 {*arm_movsi_insn}
+     (nil))
+(insn 25 24 26 (set (reg/f:SI 3 r3 [116])
+        (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])) functions.c:123 172 {*arm_movsi_insn}
+     (nil))
+(insn 26 25 27 (set (reg:SI 0 r0)
+        (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -16 [0xfffffffffffffff0])) [0 i+0 S4 A32])) functions.c:123 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 27 26 30 (parallel [
+            (call (mem:SI (reg/f:SI 3 r3 [116]) [0 *a_7 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:123 205 {*call_reg_arm}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (nil))))
+(insn 30 27 39 (const_int 0 [0]) functions.c:125 225 {nop}
+     (nil))
+(note 39 30 40 NOTE_INSN_EPILOGUE_BEG)
+(insn 40 39 41 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:125 221 {blockage}
+     (nil))
+(insn/f 41 40 42 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:125 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 42 41 43 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:125 310 {force_register_use}
+     (nil))
+(insn/f 43 42 44 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:125 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 44 43 45 (simple_return) functions.c:125 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 45 44 46)
+(code_label 46 45 47 31 "" [0 uses])
+(insn 47 46 48 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_ALIGN) 299 {align_4}
+     (nil))
+(code_label 48 47 49 30 "" [0 uses])
+(insn 49 48 50 (unspec_volatile [
+            (symbol_ref:SI ("static3") [flags 0x3]  <function_decl 03ac7200 static3>)
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 50 49 51 (unspec_volatile [
+            (symbol_ref:SI ("static4") [flags 0x3]  <function_decl 03ac7280 static4>)
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 51 50 52 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_POOL_END) 301 {consttable_end}
+     (nil))
+(barrier 52 51 33)
+(note 33 52 0 NOTE_INSN_DELETED)
+
+;; Function indirect4 (indirect4, funcdef_no=13, decl_uid=4193, cgraph_uid=13, symbol_order=13)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 15 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 15 4 16 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:127 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 16 15 17 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:127 4 {*arm_addsi3}
+     (nil))
+(insn/f 17 16 18 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -16 [0xfffffffffffffff0]))) functions.c:127 4 {*arm_addsi3}
+     (nil))
+(insn 18 17 19 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:127 293 {stack_tie}
+     (nil))
+(note 19 18 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 19 3 (set (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -16 [0xfffffffffffffff0])) [0 i+0 S4 A32])
+        (reg:SI 0 r0 [ i ])) functions.c:127 172 {*arm_movsi_insn}
+     (nil))
+(note 3 2 6 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 (set (reg/f:SI 3 r3 [110])
+        (mem:SI (label_ref 29) [0  S4 A32])) functions.c:130 172 {*arm_movsi_insn}
+     (nil))
+(insn 7 6 8 (set (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])
+        (reg/f:SI 3 r3 [110])) functions.c:130 172 {*arm_movsi_insn}
+     (nil))
+(insn 8 7 9 (set (reg/f:SI 3 r3 [111])
+        (mem/f/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 a+0 S4 A32])) functions.c:131 172 {*arm_movsi_insn}
+     (nil))
+(insn 9 8 10 (set (reg:SI 0 r0)
+        (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -16 [0xfffffffffffffff0])) [0 i+0 S4 A32])) functions.c:131 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 10 9 13 (parallel [
+            (call (mem:SI (reg/f:SI 3 r3 [111]) [0 *a_1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:131 205 {*call_reg_arm}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (nil))))
+(insn 13 10 20 (const_int 0 [0]) functions.c:133 225 {nop}
+     (nil))
+(note 20 13 21 NOTE_INSN_EPILOGUE_BEG)
+(insn 21 20 22 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:133 221 {blockage}
+     (nil))
+(insn/f 22 21 23 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:133 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 23 22 24 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:133 310 {force_register_use}
+     (nil))
+(insn/f 24 23 25 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:133 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 25 24 26 (simple_return) functions.c:133 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 26 25 27)
+(code_label 27 26 28 34 "" [0 uses])
+(insn 28 27 29 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_ALIGN) 299 {align_4}
+     (nil))
+(code_label 29 28 30 33 "" [0 uses])
+(insn 30 29 31 (unspec_volatile [
+            (symbol_ref:SI ("static3") [flags 0x3]  <function_decl 03ac7200 static3>)
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 31 30 32 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_POOL_END) 301 {consttable_end}
+     (nil))
+(barrier 32 31 14)
+(note 14 32 0 NOTE_INSN_DELETED)
+
+;; Function function_with_really_long_name_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA (function_with_really_long_name_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA, funcdef_no=14, decl_uid=4264, cgraph_uid=14, symbol_order=14)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 10 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 10 4 11 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -4 [0xfffffffffffffffc]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+        ]) functions.c:135 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -4 [0xfffffffffffffffc])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+            ])
+        (nil)))
+(insn/f 11 10 12 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 0 [0]))) functions.c:135 4 {*arm_addsi3}
+     (nil))
+(insn/f 12 11 13 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -12 [0xfffffffffffffff4]))) functions.c:135 4 {*arm_addsi3}
+     (nil))
+(insn 13 12 14 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:135 293 {stack_tie}
+     (nil))
+(note 14 13 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 14 3 (set (mem/c:SI (plus:SI (reg/f:SI 11 fp)
+                (const_int -8 [0xfffffffffffffff8])) [0 i+0 S4 A32])
+        (reg:SI 0 r0 [ i ])) functions.c:135 172 {*arm_movsi_insn}
+     (nil))
+(note 3 2 8 NOTE_INSN_FUNCTION_BEG)
+(insn 8 3 15 (const_int 0 [0]) functions.c:137 225 {nop}
+     (nil))
+(note 15 8 16 NOTE_INSN_EPILOGUE_BEG)
+(insn 16 15 17 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:137 221 {blockage}
+     (nil))
+(insn/f 17 16 18 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int 0 [0]))) functions.c:137 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (reg/f:SI 11 fp))
+        (nil)))
+(insn 18 17 19 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:137 310 {force_register_use}
+     (nil))
+(insn/f 19 18 20 (set (reg/f:SI 11 fp)
+        (mem:SI (post_inc:SI (reg/f:SI 13 sp)) [0  S4 A32])) functions.c:137 172 {*arm_movsi_insn}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 4 [0x4])))
+        (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+            (nil))))
+(jump_insn 20 19 21 (simple_return) functions.c:137 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 21 20 9)
+(note 9 21 0 NOTE_INSN_DELETED)
+
+;; Function prv_fxn1 (prv_fxn1, funcdef_no=15, decl_uid=4267, cgraph_uid=15, symbol_order=15)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 21 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 21 3 22 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:140 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 22 21 23 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:140 4 {*arm_addsi3}
+     (nil))
+(insn/f 23 22 24 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int -104 [0xffffffffffffff98]))) functions.c:140 4 {*arm_addsi3}
+     (nil))
+(insn 24 23 25 (set (mem:BLK (scratch) [0  A8])
+        (unspec:BLK [
+                (reg/f:SI 13 sp)
+                (reg/f:SI 11 fp)
+            ] UNSPEC_PRLG_STK)) functions.c:140 293 {stack_tie}
+     (nil))
+(note 25 24 2 NOTE_INSN_PROLOGUE_END)
+(note 2 25 41 NOTE_INSN_FUNCTION_BEG)
+(note 41 2 5 03ad6d90 NOTE_INSN_BLOCK_BEG)
+(insn 5 41 6 (set (reg:SI 3 r3 [111])
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -104 [0xffffffffffffff98]))) functions.c:141 4 {*arm_addsi3}
+     (nil))
+(insn 6 5 8 (set (reg:SI 2 r2 [112])
+        (const_int 100 [0x64])) functions.c:141 172 {*arm_movsi_insn}
+     (nil))
+(insn 8 6 9 (set (reg:SI 1 r1)
+        (const_int 0 [0])) functions.c:141 172 {*arm_movsi_insn}
+     (nil))
+(insn 9 8 10 (set (reg:SI 0 r0)
+        (reg:SI 3 r3 [111])) functions.c:141 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 10 9 13 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("memset") [flags 0x41]  <function_decl 03afa780 memset>) [0 memset S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:141 211 {*call_value_symbol}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (expr_list:SI (use (reg:SI 2 r2))
+                    (nil))))))
+(insn 13 10 14 (set (reg:QI 3 r3 [115])
+        (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -5 [0xfffffffffffffffb])) [0 mem+99 S1 A8])) functions.c:141 182 {*arm_movqi_insn}
+     (nil))
+(insn 14 13 16 (set (reg:SI 3 r3 [orig:110 D.4346 ] [110])
+        (and:SI (reg:SI 3 r3 [115])
+            (const_int 255 [0xff]))) functions.c:141 74 {*arm_andsi3_insn}
+     (nil))
+(insn 16 14 42 (set (mem/v/j/c:QI (plus:SI (reg/f:SI 11 fp)
+                (const_int -104 [0xffffffffffffff98])) [0 mem+0 S1 A32])
+        (reg:QI 3 r3 [116])) functions.c:141 182 {*arm_movqi_insn}
+     (nil))
+(note 42 16 19 03ad6d90 NOTE_INSN_BLOCK_END)
+(insn 19 42 26 (const_int 0 [0]) functions.c:142 225 {nop}
+     (nil))
+(note 26 19 27 NOTE_INSN_EPILOGUE_BEG)
+(insn 27 26 28 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:142 221 {blockage}
+     (nil))
+(insn/f 28 27 29 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:142 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 29 28 30 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:142 310 {force_register_use}
+     (nil))
+(insn/f 30 29 31 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:142 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 31 30 32 (simple_return) functions.c:142 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 32 31 20)
+(note 20 32 0 NOTE_INSN_DELETED)
+
+;; Function functions_prv_fxn1 (functions_prv_fxn1, funcdef_no=16, decl_uid=4271, cgraph_uid=16, symbol_order=16)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 10 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 10 3 11 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:144 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 11 10 12 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:144 4 {*arm_addsi3}
+     (nil))
+(note 12 11 2 NOTE_INSN_PROLOGUE_END)
+(note 2 12 5 NOTE_INSN_FUNCTION_BEG)
+(call_insn 5 2 8 (parallel [
+            (call (mem:SI (symbol_ref:SI ("prv_fxn1") [flags 0x3]  <function_decl 03ac7980 prv_fxn1>) [0 prv_fxn1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:145 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 8 5 13 (const_int 0 [0]) functions.c:146 225 {nop}
+     (nil))
+(note 13 8 14 NOTE_INSN_EPILOGUE_BEG)
+(insn 14 13 15 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:146 221 {blockage}
+     (nil))
+(insn/f 15 14 16 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:146 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 16 15 17 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:146 310 {force_register_use}
+     (nil))
+(insn/f 17 16 18 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:146 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 18 17 19 (simple_return) functions.c:146 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 19 18 9)
+(note 9 19 0 NOTE_INSN_DELETED)
+
+;; Function main (main, funcdef_no=17, decl_uid=4274, cgraph_uid=17, symbol_order=17)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 43 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 43 3 44 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:148 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 44 43 45 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:148 4 {*arm_addsi3}
+     (nil))
+(note 45 44 2 NOTE_INSN_PROLOGUE_END)
+(note 2 45 5 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 (set (reg:SI 1 r1)
+        (const_int 5 [0x5])) functions.c:149 172 {*arm_movsi_insn}
+     (nil))
+(insn 6 5 7 (set (reg:SI 0 r0)
+        (mem:SI (label_ref 59) [0  S4 A32])) functions.c:149 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 7 6 53 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("static1") [flags 0x3]  <function_decl 03ac7100 static1>) [0 static1 S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:149 211 {*call_value_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (nil)))))
+(insn 53 7 55 (set (reg:SI 1 r1)
+        (mem:SI (const:SI (plus:SI (label_ref 59)
+                    (const_int 4 [0x4]))) [0  S4 A32])) functions.c:150 172 {*arm_movsi_insn}
+     (nil))
+(insn 55 53 10 (set (reg:SI 0 r0)
+        (mem:SI (const:SI (plus:SI (label_ref 59)
+                    (const_int 8 [0x8]))) [0  S4 A32])) functions.c:150 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 10 55 11 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("static2") [flags 0x3]  <function_decl 03ac7180 static2>) [0 static2 S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:150 211 {*call_value_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SF (use (reg:SF 0 r0))
+            (expr_list:SF (use (reg:SF 1 r1))
+                (nil)))))
+(insn 11 10 12 (set (reg:SI 0 r0)
+        (const_int 5 [0x5])) functions.c:151 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 12 11 13 (parallel [
+            (call (mem:SI (symbol_ref:SI ("static3") [flags 0x3]  <function_decl 03ac7200 static3>) [0 static3 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:151 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (nil))))
+(insn 13 12 14 (set (reg:SI 0 r0)
+        (const_int 6 [0x6])) functions.c:152 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 14 13 15 (parallel [
+            (call (mem:SI (symbol_ref:SI ("static4") [flags 0x3]  <function_decl 03ac7280 static4>) [0 static4 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:152 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (nil))))
+(insn 15 14 16 (set (reg:SI 0 r0)
+        (const_int 7 [0x7])) functions.c:153 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 16 15 17 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("static5") [flags 0x3]  <function_decl 03ac7300 static5>) [0 static5 S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:153 211 {*call_value_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (nil))))
+(call_insn 17 16 18 (parallel [
+            (call (mem:SI (symbol_ref:SI ("recursive1") [flags 0x3]  <function_decl 03ac7380 recursive1>) [0 recursive1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:154 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(call_insn 18 17 19 (parallel [
+            (call (mem:SI (symbol_ref:SI ("recursive2a") [flags 0x3]  <function_decl 03ac7400 recursive2a>) [0 recursive2a S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:155 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(call_insn 19 18 20 (parallel [
+            (call (mem:SI (symbol_ref:SI ("recursive2b") [flags 0x3]  <function_decl 03ac7480 recursive2b>) [0 recursive2b S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:156 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(call_insn 20 19 21 (parallel [
+            (call (mem:SI (symbol_ref:SI ("recursive2c") [flags 0x3]  <function_decl 03ac7500 recursive2c>) [0 recursive2c S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:157 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(call_insn 21 20 22 (parallel [
+            (call (mem:SI (symbol_ref:SI ("recursive2d") [flags 0x3]  <function_decl 03ac7580 recursive2d>) [0 recursive2d S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:158 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 22 21 23 (set (reg:SI 0 r0)
+        (const_int 5 [0x5])) functions.c:159 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 23 22 24 (parallel [
+            (call (mem:SI (symbol_ref:SI ("indirect1") [flags 0x3]  <function_decl 03ac7600 indirect1>) [0 indirect1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:159 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (nil))))
+(insn 24 23 25 (set (reg:SI 0 r0)
+        (const_int 0 [0])) functions.c:160 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 25 24 26 (parallel [
+            (call (mem:SI (symbol_ref:SI ("indirect1") [flags 0x3]  <function_decl 03ac7600 indirect1>) [0 indirect1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:160 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (nil))))
+(call_insn 26 25 27 (parallel [
+            (call (mem:SI (symbol_ref:SI ("indirect2") [flags 0x3]  <function_decl 03ac7680 indirect2>) [0 indirect2 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:161 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 27 26 28 (set (reg:SI 1 r1)
+        (const_int 9 [0x9])) functions.c:162 172 {*arm_movsi_insn}
+     (nil))
+(insn 28 27 29 (set (reg:SI 0 r0)
+        (const_int 8 [0x8])) functions.c:162 172 {*arm_movsi_insn}
+     (nil))
+(call_insn 29 28 30 (parallel [
+            (call (mem:SI (symbol_ref:SI ("indirect3") [flags 0x3]  <function_decl 03ac7700 indirect3>) [0 indirect3 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:162 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (expr_list:SI (use (reg:SI 0 r0))
+            (expr_list:SI (use (reg:SI 1 r1))
+                (nil)))))
+(call_insn 30 29 31 (parallel [
+            (call (mem:SI (symbol_ref:SI ("functions_prv_fxn1") [flags 0x3]  <function_decl 03ac7a00 functions_prv_fxn1>) [0 functions_prv_fxn1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:164 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(call_insn 31 30 32 (parallel [
+            (call (mem:SI (symbol_ref:SI ("extern_prv_fxn1") [flags 0x41]  <function_decl 03ac7880 extern_prv_fxn1>) [0 extern_prv_fxn1 S4 A32])
+                (const_int 0 [0]))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:165 210 {*call_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 32 31 39 (set (reg:SI 3 r3 [orig:110 D.4349 ] [110])
+        (const_int 0 [0])) functions.c:166 172 {*arm_movsi_insn}
+     (nil))
+(insn 39 32 40 (set (reg/i:SI 0 r0)
+        (reg:SI 3 r3 [orig:111 <retval> ] [111])) functions.c:167 172 {*arm_movsi_insn}
+     (nil))
+(insn 40 39 46 (use (reg/i:SI 0 r0)) functions.c:167 -1
+     (nil))
+(note 46 40 47 NOTE_INSN_EPILOGUE_BEG)
+(insn 47 46 48 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:167 221 {blockage}
+     (nil))
+(insn/f 48 47 49 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:167 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 49 48 50 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:167 310 {force_register_use}
+     (nil))
+(insn/f 50 49 51 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:167 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 51 50 52 (simple_return) functions.c:167 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 52 51 57)
+(code_label 57 52 58 41 "" [0 uses])
+(insn 58 57 59 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_ALIGN) 299 {align_4}
+     (nil))
+(code_label 59 58 60 40 "" [0 uses])
+(insn 60 59 61 (unspec_volatile [
+            (symbol_ref/f:SI ("*.LC1") [flags 0x2]  <var_decl 03b11580 *.LC1>)
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 61 60 62 (unspec_volatile [
+            (const_int 1095027917 [0x4144cccd])
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 62 61 63 (unspec_volatile [
+            (const_int 1093979341 [0x4134cccd])
+        ] VUNSPEC_POOL_4) 304 {consttable_4}
+     (nil))
+(insn 63 62 64 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_POOL_END) 301 {consttable_end}
+     (nil))
+(barrier 64 63 42)
+(note 42 64 0 NOTE_INSN_DELETED)
+
+;; Function main3 (main3, funcdef_no=18, decl_uid=4277, cgraph_uid=18, symbol_order=18)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 14 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 14 3 15 (parallel [
+            (set (mem/c:BLK (pre_modify:SI (reg/f:SI 13 sp)
+                        (plus:SI (reg/f:SI 13 sp)
+                            (const_int -8 [0xfffffffffffffff8]))) [0  A8])
+                (unspec:BLK [
+                        (reg/f:SI 11 fp)
+                    ] UNSPEC_PUSH_MULT))
+            (use (reg:SI 14 lr))
+        ]) functions.c:169 292 {*push_multi}
+     (expr_list:REG_FRAME_RELATED_EXPR (sequence [
+                (set/f (reg/f:SI 13 sp)
+                    (plus:SI (reg/f:SI 13 sp)
+                        (const_int -8 [0xfffffffffffffff8])))
+                (set/f (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32])
+                    (reg/f:SI 11 fp))
+                (set/f (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                            (const_int 4 [0x4])) [0  S4 A32])
+                    (reg:SI 14 lr))
+            ])
+        (nil)))
+(insn/f 15 14 16 (set (reg/f:SI 11 fp)
+        (plus:SI (reg/f:SI 13 sp)
+            (const_int 4 [0x4]))) functions.c:169 4 {*arm_addsi3}
+     (nil))
+(note 16 15 2 NOTE_INSN_PROLOGUE_END)
+(note 2 16 5 NOTE_INSN_FUNCTION_BEG)
+(call_insn 5 2 8 (parallel [
+            (set (reg:SI 0 r0)
+                (call (mem:SI (symbol_ref:SI ("main") [flags 0x3]  <function_decl 03ac7a80 main>) [0 main S4 A32])
+                    (const_int 0 [0])))
+            (use (const_int 0 [0]))
+            (clobber (reg:SI 14 lr))
+        ]) functions.c:170 211 {*call_value_symbol}
+     (nil)
+    (expr_list (clobber (reg:SI 12 ip))
+        (nil)))
+(insn 8 5 9 (clobber (reg/i:SI 0 r0)) functions.c:171 -1
+     (nil))
+(insn 9 8 12 (clobber (reg:SI 3 r3 [orig:110 <retval> ] [110])) functions.c:171 -1
+     (nil))
+(insn 12 9 7 (const_int 0 [0]) functions.c:171 225 {nop}
+     (nil))
+(insn 7 12 10 (set (reg/i:SI 0 r0)
+        (reg:SI 3 r3 [orig:110 <retval> ] [110])) functions.c:171 172 {*arm_movsi_insn}
+     (nil))
+(insn 10 7 17 (use (reg/i:SI 0 r0)) functions.c:171 -1
+     (nil))
+(note 17 10 18 NOTE_INSN_EPILOGUE_BEG)
+(insn 18 17 19 (unspec_volatile [
+            (const_int 0 [0])
+        ] VUNSPEC_BLOCKAGE) functions.c:171 221 {blockage}
+     (nil))
+(insn/f 19 18 20 (set (reg/f:SI 13 sp)
+        (plus:SI (reg/f:SI 11 fp)
+            (const_int -4 [0xfffffffffffffffc]))) functions.c:171 4 {*arm_addsi3}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 11 fp)
+                (const_int -4 [0xfffffffffffffffc])))
+        (nil)))
+(insn 20 19 21 (unspec:SI [
+            (reg/f:SI 13 sp)
+        ] UNSPEC_REGISTER_USE) functions.c:171 310 {force_register_use}
+     (nil))
+(insn/f 21 20 22 (parallel [
+            (set/f (reg/f:SI 13 sp)
+                (plus:SI (reg/f:SI 13 sp)
+                    (const_int 8 [0x8])))
+            (set/f (reg/f:SI 11 fp)
+                (mem/c:SI (reg/f:SI 13 sp) [0  S4 A32]))
+            (set/f (reg:SI 14 lr)
+                (mem/c:SI (plus:SI (reg/f:SI 13 sp)
+                        (const_int 4 [0x4])) [0  S4 A32]))
+        ]) functions.c:171 294 {*load_multiple_with_writeback}
+     (expr_list:REG_CFA_ADJUST_CFA (set (reg/f:SI 13 sp)
+            (plus:SI (reg/f:SI 13 sp)
+                (const_int 8 [0x8])))
+        (expr_list:REG_CFA_RESTORE (reg:SI 14 lr)
+            (expr_list:REG_CFA_RESTORE (reg/f:SI 11 fp)
+                (nil)))))
+(jump_insn 22 21 23 (simple_return) functions.c:171 219 {*arm_simple_return}
+     (nil)
+ -> simple_return)
+(barrier 23 22 13)
+(note 13 23 0 NOTE_INSN_DELETED)
