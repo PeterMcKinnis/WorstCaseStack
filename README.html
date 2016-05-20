@@ -469,40 +469,89 @@ vertical-align:1px;
 </style>
 </head>
 <body>
-<h1 id="worst-case-stack">Worst Case Stack</h1>
-<h2 id="overview">Overview</h2>
+<h1>Worst Case Stack</h1>
+
+<h2>Overview</h2>
+
 <p>This program is used to do static stack analysis on C source code to determine the maximum stack space used by each function.  Source must be compiled using gcc with a number of special flags (see below for details)</p>
-<h2 id="useage">Useage</h2>
+
+<h2>Useage</h2>
+
 <ol>
-<li>compile *.c sources using gcc and the flags <code>-c</code>, <code>-fdump-rtl-dfinish</code> and <code>-fstack-usage</code></li><li>Run the script python <code>wcs.py</code></li></ol>
+<li>compile *.c sources using gcc and the flags <code>-c</code>, <code>-fdump-rtl-dfinish</code> and <code>-fstack-usage</code>
+</li>
+<li>Run the script python wcs.py</li>
+</ol>
+
 <pre><code>gcc -c -fdump-rtl-dfinish -fstack-usage main.c my_library.c other.c
 wcs.py
-</code></pre><p><strong>Note:</strong> When running <code>wcs.py</code> the current working directory must contain all the relevant input files.</p>
-<h2 id="dependencies">Dependencies</h2>
+</code></pre>
+
+<p><strong>Note:</strong> When running <code>wcs.py</code> the current working directory must contain all the relevant input files.</p>
+
+<h2>Dependencies</h2>
+
 <p>This script requires python 3.  It was written and tested using version 3.4.3</p>
-<h2 id="inputs-files-from-gcc-">Inputs - Files from gcc.</h2>
+
+<h2>Inputs - Files from gcc.</h2>
+
 <p>The script will search the current directory for sets of files with the names <code>&lt;name&gt;.o</code>, <code>&lt;name&gt;.su</code> and <code>&lt;name&gt;.c.270r.dfinish</code>. If all three are found the script will calculate the worst case stack for every function in the <code>&lt;name&gt;.c</code>.</p>
+
 <p>See the usage section for information about how to generate these files.</p>
-<h2 id="inputs-manual-stack-usage-files">Inputs - Manual Stack Usage Files</h2>
+
+<h2>Inputs - Manual Stack Usage Files</h2>
+
 <p>The scripts also look in files ending with *.msu.  These files should contain a whitespace delimited table with function names in the first column, and a decimal integer with the worst case stack usage in the second line </p>
+
 <pre><code>my_function 20
 do_something 120
 __exit 144
-</code></pre><p>Every line must contain a function / stack pair (empty lines are not permitted).  These files can be useful for specifying the worst case stack for functions for which the c-source is not available but the stack usage is known by other means such as inspecting the assembly or run-time testing.</p>
-<h2 id="output">Output</h2>
+</code></pre>
+
+<p>Every line must contain a function / stack pair (empty lines are not permitted).  These files can be useful for specifying the worst case stack for functions for which the c-source is not available but the stack usage is known by other means such as inspecting the assembly or run-time testing.</p>
+
+<h2>Output</h2>
+
 <p>The script will output a list of functions in a table with the following columns:</p>
+
 <ol>
-<li><strong>Translation Unit</strong> (e.g. the name of the file where the function is implemented)</li><li><strong>Function Name</strong></li><li><strong>Stack</strong> Either the maximum number of bytes during a call to this function (including nested calls at all depths)<br>or the string <code>unbounded</code> if the maximum cannot be determined because some function in the call tree is recursively defined or makes calls via function pointer.</li><li><strong>Unresolved Dependancies</strong> A list functions that are called somewhere in the call tree for which there is no<br>definition in any of the given input files.</li></ol>
-<h2 id="known-limitations-">Known Limitations:</h2>
+<li>
+<strong>Translation Unit</strong> (e.g. the name of the file where the function is implemented)</li>
+<li><strong>Function Name</strong></li>
+<li>
+<strong>Stack</strong> Either the maximum number of bytes during a call to this function (including nested calls at all depths)
+or the string <code>unbounded</code> if the maximum cannot be determined because some function in the call tree is recursively defined or makes calls via function pointer.</li>
+<li>
+<strong>Unresolved Dependancies</strong> A list functions that are called somewhere in the call tree for which there is no
+definition in any of the given input files.</li>
+</ol>
+
+<h2>Known Limitations:</h2>
+
 <ol>
-<li><code>wcs.py</code> can only determine stack usage from <code>*.c</code> source.  Calls to compiled libraries (e.g. libc.a) or to assembly functions will result in <code>unbounded</code> (e.g. unknown) stack usage.</li><li>Functions compiled with the <code>weak</code> attribute will crash this script</li><li>The actual worst case stack may be greater than reported by this function if outside actors modify the stack.  Common offenders are:<ol>
-<li>Interrupt handlers</li><li>Operating system context changes</li></ol>
-</li><li>The use of inline assembly will result in potentially incorrect results.  Specifically, if a function uses inline assembly to load or store from the stack, modify the stack pointer, or branch to code that does likewise, expect incorrect results.  </li></ol>
-<p><strong>The script has no way to detect situations 3 and 4.  In the presence of these conditions the script will complete successfully.  Use caution.</strong></p>
-<h2 id="notes">Notes</h2>
+<li>wcs.py can only determine stack usage from <code>*.c</code> source.  Calls to compiled libraries (e.g. libc.a) or to assembly functions will result in <code>unbounded</code> (e.g. unknown) stack usage.</li>
+<li>Functions compiled with the <code>weak</code> attribute will crash this script</li>
+<li>The actual worst case stack may be greater than reported by this function if outside actors modify the stack.  Common offenders are:
+
 <ol>
-<li>This script assumes little endian byte ordering for object files.  If you are compiling for a big-endian system set the <code>byte_order</code> variable to <code>&quot;&gt;&quot;</code> in the file <code>elf.py</code></li></ol>
-<pre><code>byte_order = &quot;&gt;&quot;
+<li>Interrupt handlers</li>
+<li>Operating system context changes</li>
+</ol>
+</li>
+<li>The use of inline assembly will result in potentially incorrect results.  Specifically, if a function uses inline assembly to load or store from the stack, modify the stack pointer, or branch to code that does likewise, expect incorrect results.<br>
+</li>
+</ol>
+
+<p><strong>The script has no way to detect situations 3 and 4.  In the presence of these conditions the script will still complete successfully.  Use caution.</strong></p>
+
+<h2>Notes</h2>
+
+<ol>
+<li>This script assumes little endian byte ordering for object files.  If you are compiling for a big-endian system set the <code>byte_order</code> variable to <code>"&gt;"</code> in the file <code>elf.py</code>
+</li>
+</ol>
+
+<pre><code>byte_order = "&gt;" 
 </code></pre>
 </body>
 </html>

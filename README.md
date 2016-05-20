@@ -5,7 +5,7 @@ This program is used to do static stack analysis on C source code to determine t
 
 ## Useage
 1. compile *.c sources using gcc and the flags `-c`, `-fdump-rtl-dfinish` and `-fstack-usage`
-2. Run the script python `wcs.py`
+2. Run the script python wcs.py
 
 ```
 gcc -c -fdump-rtl-dfinish -fstack-usage main.c my_library.c other.c
@@ -36,6 +36,7 @@ Every line must contain a function / stack pair (empty lines are not permitted).
 
 ## Output
 The script will output a list of functions in a table with the following columns:
+
 1. **Translation Unit** (e.g. the name of the file where the function is implemented)
 2. **Function Name**
 3. **Stack** Either the maximum number of bytes during a call to this function (including nested calls at all depths)
@@ -44,14 +45,14 @@ or the string `unbounded` if the maximum cannot be determined because some funct
 definition in any of the given input files.
 
 ## Known Limitations:
-1. `wcs.py` can only determine stack usage from `*.c` source.  Calls to compiled libraries (e.g. libc.a) or to assembly functions will result in `unbounded` (e.g. unknown) stack usage.
+1. wcs.py can only determine stack usage from `*.c` source.  Calls to compiled libraries (e.g. libc.a) or to assembly functions will result in `unbounded` (e.g. unknown) stack usage.
 2. Functions compiled with the `weak` attribute will crash this script
 3. The actual worst case stack may be greater than reported by this function if outside actors modify the stack.  Common offenders are:
     1. Interrupt handlers
     2. Operating system context changes
 4. The use of inline assembly will result in potentially incorrect results.  Specifically, if a function uses inline assembly to load or store from the stack, modify the stack pointer, or branch to code that does likewise, expect incorrect results.  
 
-**The script has no way to detect situations 3 and 4.  In the presence of these conditions the script will complete successfully.  Use caution.**
+**The script has no way to detect situations 3 and 4.  In the presence of these conditions the script will still complete successfully.  Use caution.**
 
 ## Notes
 5. This script assumes little endian byte ordering for object files.  If you are compiling for a big-endian system set the `byte_order` variable to `">"` in the file `elf.py`
