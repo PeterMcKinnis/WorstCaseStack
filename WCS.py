@@ -8,7 +8,7 @@ rtl_ext = '.c.270r.dfinish' # The number '270' will change with gcc version
 su_ext = '.su'
 obj_ext = '.o'
 manual_ext = '.msu'
-read_elf_path = "F:/Software/ArmGCC/5.3 2016q1/bin/arm-none-eabi-readelf.exe" # You may need to enter the full path here
+read_elf_path = "arm-none-eabi-readelf.exe" # You may need to enter the full path here
 stdout_encoding = "utf-8"  # System dependant
 
 
