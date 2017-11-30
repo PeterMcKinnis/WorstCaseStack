@@ -279,17 +279,18 @@ def calc_all_wcs(call_graph):
 
 
 def print_all_fxns(call_graph):
-    print("")
-    print("{:<16} {:<16} {:<9} {:<16}".format('Translation Unit', 'Function Name', 'Stack ', 'Unresolved Dependencies'))
 
-    def print_fxn(fxn_dict2):
+    def print_fxn(row_format, fxn_dict2):
         unresolved = fxn_dict2['unresolved_calls']
+        stack = str(fxn_dict2['wcs'])
         if unresolved:
             unresolved_str = '({})'.format(' ,'.join(unresolved))
+            if stack != 'unbounded':
+                stack = "unbounded:" + stack
         else:
             unresolved_str = ''
 
-        print("{:<16} {:<16} {:>9} {:<16}".format(fxn_dict2['tu'], fxn_dict2['name'], fxn_dict2['wcs'], unresolved_str))
+        print(row_format.format(fxn_dict2['tu'], fxn_dict2['name'], stack, unresolved_str))
 
     def get_order(val):
         if val == 'unbounded':
@@ -308,8 +309,17 @@ def print_all_fxns(call_graph):
             d_list.append(fxn_dict)
 
     d_list.sort(key=lambda item: get_order(item['wcs']))
+
+    # Calculate table width
+    tu_width = max(max([len(d['tu']) for d in d_list]), 16)
+    name_width = max(max([len(d['name']) for d in d_list]), 13)
+    row_format = "{:<" + str(tu_width + 2) + "}  {:<" + str(name_width + 2) + "}  {:>14}  {:<17}"
+
+    # Print out the table
+    print("")
+    print(row_format.format('Translation Unit', 'Function Name', 'Stack', 'Unresolved Dependencies'))
     for d in d_list:
-        print_fxn(d)
+        print_fxn(row_format, d)
 
 
 def find_files():

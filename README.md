@@ -41,9 +41,12 @@ The script will output a list of functions in a table with the following columns
 
 1. **Translation Unit** (e.g. the name of the file where the function is implemented)
 2. **Function Name**
-3. **Stack** Either the maximum number of bytes during a call to this function (including nested calls at all depths)
-or the string `unbounded` if the maximum cannot be determined because some function in the call tree is recursively defined or makes calls via function pointer.
-4. **Unresolved Dependancies** A list functions that are called somewhere in the call tree for which there is no
+3. **Stack** - The maximum number of bytes used during a call to this function (including nested calls at all depths).
+If the maximum cannot be determined because some function in the call tree is recursively 
+defined or makes calls via function pointer this returns the string `unbounded`.  
+If there are one or more unresolved dependencies this returns the worst case stack assuming that each unresolved dependency 
+uses no stack space preceded by the string `unbounded:`.  Consider adding a manual stack usage file, for better predictions.
+4. **Unresolved Dependencies** A list functions that are called somewhere in the call tree for which there is no
 definition in any of the given input files.
 
 ## Known Limitations:
