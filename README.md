@@ -16,7 +16,9 @@ wcs.py
 
 
 ## Dependencies
-This script requires python 3.  It was written and tested using version 3.4.3
+1. This script requires python 3.  It was written and tested using version 3.6.2
+2. Code must be compiled with `gcc`.  The script directly calls the utility function `readelf`.  `readelf` probably
+resides in in the same folder as the gcc executable on your system.
 
 ## Inputs - Files from gcc.
 The script will search the current directory for sets of files with the names `<name>.o`, `<name>.su` and `<name>.c.270r.dfinish`. If all three are found the script will calculate the worst case stack for every function in the `<name>.c`.
@@ -54,9 +56,9 @@ definition in any of the given input files.
 
 **The script has no way to detect situations 3 and 4.  In the presence of these conditions the script will still complete successfully.  Use caution.**
 
-## Notes
-5. This script assumes little endian byte ordering for object files.  If you are compiling for a big-endian system set the `byte_order` variable to `">"` in the file `elf.py`
+## Updates
 
-```
-byte_order = ">" 
-```
+### November 30th, 2017
+1. Removed removed home-brew reading of the symbol table (elf.py) in favor of parsing output from `readelf`.  This should improve compatibility.
+2. Fixed 2 spelling errors
+3. Fixed bug when displaying a `multiple declarations` error

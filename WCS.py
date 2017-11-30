@@ -1,13 +1,47 @@
 import re
 import pprint
-import elf
 import os
+from subprocess import check_output
 
 # Constants
-rtl_ext = '.c.270r.dfinish'
+rtl_ext = '.c.270r.dfinish' # The number '270' will change with gcc version
 su_ext = '.su'
 obj_ext = '.o'
 manual_ext = '.msu'
+read_elf_path = "F:/Software/ArmGCC/5.3 2016q1/bin/arm-none-eabi-readelf.exe" # You may need to enter the full path here
+stdout_encoding = "utf-8"  # System dependant
+
+
+class Printable:
+    def __repr__(self):
+        return "<" + type(self).__name__ + "> " + pprint.pformat(vars(self), indent=4, width=1)
+
+
+class Symbol(Printable):
+    pass
+
+
+def read_symbols(file):
+    from subprocess import check_output
+
+    def to_symbol(read_elf_line):
+        v = read_elf_line.split()
+
+        s2 = Symbol()
+        s2.value = int(v[1], 16)
+        s2.size = int(v[2])
+        s2.type = v[3]
+        s2.binding = v[4]
+        if len(v) >= 8:
+            s2.name = v[7]
+        else:
+            s2.name = ""
+
+        return s2
+
+    output = check_output([read_elf_path, "-s", "-W", file]).decode(stdout_encoding)
+    lines = output.splitlines()[3:]
+    return [to_symbol(line) for line in lines]
 
 
 def read_obj(tu, call_graph):
@@ -16,8 +50,7 @@ def read_obj(tu, call_graph):
     :param tu: name of the translation unit (e.g. for main.c, this would be 'main')
     :param call_graph: a object used to store information about each function, results go here
     """
-
-    symbols = elf.read_symbols(tu + obj_ext)
+    symbols = read_symbols(tu + obj_ext)
 
     for s in symbols:
 
@@ -30,7 +63,7 @@ def read_obj(tu, call_graph):
             elif s.binding == 'LOCAL':
                 # Check for multiple declarations
                 if s.name in call_graph['locals'] and tu in call_graph['locals'][s.name]:
-                    raise Exception('Multiple declarations of {}'.format(s.name_str))
+                    raise Exception('Multiple declarations of {}'.format(s.name))
 
                 if s.name not in call_graph['locals']:
                     call_graph['locals'][s.name] = {}
@@ -192,7 +225,7 @@ def calc_all_wcs(call_graph):
     def calc_wcs(fxn_dict2, call_graph1, parents):
         """
         Calculates the worst case stack for a fxn that is declared (or called from) in a given file.
-        :param parents: This function gets called recursively through the call graph.  If a fucntion has recursion the
+        :param parents: This function gets called recursively through the call graph.  If a function has recursion the
         tuple file, fxn will be in the parents stack and everything between the top of the stack and the matching entry
         has recursion.
         :return:
@@ -247,7 +280,7 @@ def calc_all_wcs(call_graph):
 
 def print_all_fxns(call_graph):
     print("")
-    print("{:<16} {:<16} {:<9} {:<16}".format('Tranlation Unit', 'Function Name', 'Stack ', 'Unresolved Dependencies'))
+    print("{:<16} {:<16} {:<9} {:<16}".format('Translation Unit', 'Function Name', 'Stack ', 'Unresolved Dependencies'))
 
     def print_fxn(fxn_dict2):
         unresolved = fxn_dict2['unresolved_calls']
