@@ -2,9 +2,13 @@ import re
 import pprint
 import os
 from subprocess import check_output
+from optparse import OptionParser
 
 # Constants
-rtl_ext = '.c.270r.dfinish' # The number '270' will change with gcc version
+rtl_ext_end = ".dfinish"
+rtl_ext = None # e.g. '.c.270r.dfinish'. The number '270' will change with gcc version and is auto-detected by the
+               # function find_rtl_ext
+dir = None # Working directory
 su_ext = '.su'
 obj_ext = '.o'
 manual_ext = '.msu'
@@ -322,11 +326,28 @@ def print_all_fxns(call_graph):
         print_fxn(row_format, d)
 
 
+def find_rtl_ext():
+    # Find the rtl_extension
+
+    global rtl_ext
+    all_files = os.listdir('.')
+
+    for f in all_files:
+        if (f.endswith(rtl_ext_end)):
+            rtl_ext = f[f.index("."):]
+            print("rtl_ext = " + rtl_ext)
+            return
+
+    print("Could not find any files ending with '.dfinish'.  Check that the script is being run from the correct "
+          "directory.  Check that the code was compiled with the correct flags")
+    exit(-1)
+
+
 def find_files():
     tu = []
     manual = []
-
     all_files = os.listdir('.')
+
     files = [f for f in all_files if os.path.isfile(f) and f.endswith(rtl_ext)]
     for f in files:
         base = f[0:-len(rtl_ext)]
@@ -339,10 +360,20 @@ def find_files():
         manual.append(f)
         print('Reading: {}'.format(f))
 
+    # Print some diagnostic messages
+    if not tu:
+        print("Could not find any translation units to analyse")
+        exit(-1)
+
     return tu, manual
 
 
 def main():
+
+    # Find the appropriate RTL extension
+    find_rtl_ext()
+
+    # Find all input files
     call_graph = {'locals': {}, 'globals': {}}
     tu_list, manual_list = find_files()
 

@@ -21,7 +21,7 @@ wcs.py
 resides in in the same folder as the gcc executable on your system.
 
 ## Inputs - Files from gcc.
-The script will search the current directory for sets of files with the names `<name>.o`, `<name>.su` and `<name>.c.270r.dfinish`. If all three are found the script will calculate the worst case stack for every function in the `<name>.c`.
+The script will search the current directory for sets of files with the names `<name>.o`, `<name>.su` and `<name>.c.<id>.dfinish`. If all three are found the script will calculate the worst case stack for every function in the translation unit `<name>.c`.  The value of `<id>` depends on the version of GCC you use and is auto-detected by the script.  In gcc 5.3.1, for example, the value of `<id>` is `270r`. 
 
 See the usage section for information about how to generate these files.
 
@@ -65,3 +65,7 @@ definition in any of the given input files.
 1. Removed removed home-brew reading of the symbol table (elf.py) in favor of parsing output from `readelf`.  This should improve compatibility.
 2. Fixed 2 spelling errors
 3. Fixed bug when displaying a `multiple declarations` error
+
+### April 25, 2018
+1. Added autodetection of the RTL extension (e.g. '270r')
+2. Added better error message
