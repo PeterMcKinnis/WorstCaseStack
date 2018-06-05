@@ -54,7 +54,7 @@ def read_obj(tu, call_graph):
     :param tu: name of the translation unit (e.g. for main.c, this would be 'main')
     :param call_graph: a object used to store information about each function, results go here
     """
-    symbols = read_symbols(tu + obj_ext)
+    symbols = read_symbols(tu[0:tu.rindex(".")] + obj_ext)
 
     for s in symbols:
 
@@ -99,6 +99,26 @@ def find_fxn(tu, fxn, call_graph):
             return None
 
 
+def find_demangled_fxn(tu, fxn, call_graph):
+    """
+    Looks up the dictionary associated with the function.
+    :param tu: The translation unit in which to look for locals functions
+    :param fxn: The function name
+    :param call_graph: a object used to store information about each function
+    :return: the dictionary for the given function or None
+    """
+    for f in call_graph['globals'].values():
+        if 'demangledName' in f:
+            if f['demangledName'] == fxn:
+                return f
+    for f in call_graph['locals'].values():
+        if tu in f:
+            if 'demangledName' in f[tu]:
+                if f[tu]['demangledName'] == fxn:
+                    return f[tu]
+    return None
+
+
 def read_rtl(tu, call_graph):
     """
     Read an RTL file and finds callees for each function and if there are calls via function pointer.
@@ -107,19 +127,20 @@ def read_rtl(tu, call_graph):
     """
 
     # Construct A Call Graph
-    function = re.compile(r'^;; Function (.*)\s+\((\S+)(,.*)?\).*$')
+    function = re.compile(r'^;; Function (.*) \((\S+), funcdef_no=\d+(, [a-z_]+=\d+)*\)( \([a-z ]+\))?$')
     static_call = re.compile(r'^.*\(call.*"(.*)".*$')
     other_call = re.compile(r'^.*call .*$')
 
     for line_ in open(tu + rtl_ext).readlines():
         m = function.match(line_)
         if m:
-            fxn_name = m.group(1)
+            fxn_name = m.group(2)
             fxn_dict2 = find_fxn(tu, fxn_name, call_graph)
             if not fxn_dict2:
                 pprint.pprint(call_graph)
                 raise Exception("Error locating function {} in {}".format(fxn_name, tu))
 
+            fxn_dict2['demangledName'] = m.group(1)
             fxn_dict2['calls'] = set()
             fxn_dict2['has_ptr_call'] = False
             continue
@@ -144,14 +165,14 @@ def read_su(tu, call_graph):
     :return:
     """
 
-    su_line = re.compile(r'^([^ :]+):([\d]+):([\d]+):([\S]+)\s+(\d+)\s+(\S+)$')
+    su_line = re.compile(r'^([^ :]+):([\d]+):([\d]+):(.+)\t(\d+)\t(\S+)$')
     i = 1
 
-    for line in open(tu + su_ext).readlines():
+    for line in open(tu[0:tu.rindex(".")] + su_ext).readlines():
         m = su_line.match(line)
         if m:
             fxn = m.group(4)
-            fxn_dict2 = find_fxn(tu, fxn, call_graph)
+            fxn_dict2 = find_demangled_fxn(tu, fxn, call_graph)
             fxn_dict2['local_stack'] = int(m.group(5))
         else:
             print("error parsing line {} in file {}".format(i, tu))
@@ -290,7 +311,7 @@ def print_all_fxns(call_graph):
         else:
             unresolved_str = ''
 
-        print(row_format.format(fxn_dict2['tu'], fxn_dict2['name'], stack, unresolved_str))
+        print(row_format.format(fxn_dict2['tu'], fxn_dict2['demangledName'], stack, unresolved_str))
 
     def get_order(val):
         if val == 'unbounded':
@@ -324,7 +345,6 @@ def print_all_fxns(call_graph):
 
 def find_rtl_ext():
     # Find the rtl_extension
-
     global rtl_ext
     
     for root, directories, filenames in os.walk('.'):
@@ -350,9 +370,10 @@ def find_files():
     files = [f for f in all_files if os.path.isfile(f) and f.endswith(rtl_ext)]
     for f in files:
         base = f[0:-len(rtl_ext)]
-        if base + su_ext in all_files and base + obj_ext in all_files:
+        short_base = base[0:base.rindex(".")]
+        if short_base + su_ext in all_files and short_base + obj_ext in all_files:
             tu.append(base)
-            print('Reading: {}{}, {}{}, {}{}'.format(base, rtl_ext, base, su_ext, base, obj_ext))
+            print('Reading: {}{}, {}{}, {}{}'.format(base, rtl_ext, short_base, su_ext, short_base, obj_ext))
 
     files = [f for f in all_files if os.path.isfile(f) and f.endswith(manual_ext)]
     for f in files:
