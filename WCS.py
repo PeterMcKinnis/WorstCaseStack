@@ -330,13 +330,13 @@ def find_rtl_ext():
     # Find the rtl_extension
 
     global rtl_ext
-    all_files = os.listdir('.')
-
-    for f in all_files:
-        if (f.endswith(rtl_ext_end)):
-            rtl_ext = f[f.index("."):]
-            print("rtl_ext = " + rtl_ext)
-            return
+    
+    for root, directories, filenames in os.walk('.'):
+        for f in filenames:
+            if (f.endswith(rtl_ext_end)):
+                rtl_ext = f[f.index("."):]
+                print("rtl_ext = " + rtl_ext)
+                return
 
     print("Could not find any files ending with '.dfinish'.  Check that the script is being run from the correct "
           "directory.  Check that the code was compiled with the correct flags")
@@ -346,7 +346,10 @@ def find_rtl_ext():
 def find_files():
     tu = []
     manual = []
-    all_files = os.listdir('.')
+    all_files = []
+    for root, directories, filenames in os.walk('.'):
+        for filename in filenames:
+            all_files.append(os.path.join(root,filename))
 
     files = [f for f in all_files if os.path.isfile(f) and f.endswith(rtl_ext)]
     for f in files:
