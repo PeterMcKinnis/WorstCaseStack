@@ -68,6 +68,10 @@ def read_obj(tu, call_graph):
                 # Check for multiple declarations
                 if s.name in call_graph['locals'] and tu in call_graph['locals'][s.name]:
                     raise Exception('Multiple declarations of {}'.format(s.name))
+            elif s.binding == 'WEAK':
+                if s.name in call_graph['weak']:
+                    raise Exception('Multiple declarations of {}'.format(s.name))
+                call_graph['weak'][s.name] = {'tu': tu, 'name': s.name, 'binding': s.binding}
 
                 if s.name not in call_graph['locals']:
                     call_graph['locals'][s.name] = {}
@@ -194,14 +198,6 @@ def validate_all_data(call_graph):
     for l_dict in call_graph['locals'].values():
         for fxn_dict2 in l_dict.values():
             validate_dict(fxn_dict2)
-
-
-def read_tu(tu, call_graph):
-    # Does all the processing for a specific translation unit
-    read_obj(tu, call_graph)  # This must be first
-    read_rtl(tu, call_graph)
-    read_su(tu, call_graph)
-
 
 def resolve_all_calls(call_graph):
     def resolve_calls(fxn_dict2):
@@ -377,12 +373,21 @@ def main():
     find_rtl_ext()
 
     # Find all input files
-    call_graph = {'locals': {}, 'globals': {}}
+    call_graph = {'locals': {}, 'globals': {}, 'weak': {}}
     tu_list, manual_list = find_files()
 
     # Read the input files
     for tu in tu_list:
-        read_tu(tu, call_graph)
+        read_obj(tu, call_graph)  # This must be first
+        
+    for fxn in call_graph['weak'].values():
+        if fxn['name'] not in call_graph['globals'].keys():
+            call_graph['globals'][fxn['name']] = fxn
+
+    for tu in tu_list:
+        read_rtl(tu, call_graph)
+    for tu in tu_list:
+        read_su(tu, call_graph)
 
     # Read manual files
     for m in manual_list:
