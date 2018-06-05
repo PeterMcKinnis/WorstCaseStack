@@ -68,6 +68,10 @@ def read_obj(tu, call_graph):
                 # Check for multiple declarations
                 if s.name in call_graph['locals'] and tu in call_graph['locals'][s.name]:
                     raise Exception('Multiple declarations of {}'.format(s.name))
+            elif s.binding == 'WEAK':
+                if s.name in call_graph['weak']:
+                    raise Exception('Multiple declarations of {}'.format(s.name))
+                call_graph['weak'][s.name] = {'tu': tu, 'name': s.name, 'binding': s.binding}
 
                 if s.name not in call_graph['locals']:
                     call_graph['locals'][s.name] = {}
@@ -216,14 +220,6 @@ def validate_all_data(call_graph):
         for fxn_dict2 in l_dict.values():
             validate_dict(fxn_dict2)
 
-
-def read_tu(tu, call_graph):
-    # Does all the processing for a specific translation unit
-    read_obj(tu, call_graph)  # This must be first
-    read_rtl(tu, call_graph)
-    read_su(tu, call_graph)
-
-
 def resolve_all_calls(call_graph):
     def resolve_calls(fxn_dict2):
         fxn_dict2['r_calls'] = []
@@ -349,15 +345,14 @@ def print_all_fxns(call_graph):
 
 def find_rtl_ext():
     # Find the rtl_extension
-
     global rtl_ext
-    all_files = os.listdir('.')
-
-    for f in all_files:
-        if (f.endswith(rtl_ext_end)):
-            rtl_ext = f[f[:-len(rtl_ext_end)].rindex("."):]
-            print("rtl_ext = " + rtl_ext)
-            return
+    
+    for root, directories, filenames in os.walk('.'):
+        for f in filenames:
+            if (f.endswith(rtl_ext_end)):
+                rtl_ext = f[f.index("."):]
+                print("rtl_ext = " + rtl_ext)
+                return
 
     print("Could not find any files ending with '.dfinish'.  Check that the script is being run from the correct "
           "directory.  Check that the code was compiled with the correct flags")
@@ -367,7 +362,10 @@ def find_rtl_ext():
 def find_files():
     tu = []
     manual = []
-    all_files = os.listdir('.')
+    all_files = []
+    for root, directories, filenames in os.walk('.'):
+        for filename in filenames:
+            all_files.append(os.path.join(root,filename))
 
     files = [f for f in all_files if os.path.isfile(f) and f.endswith(rtl_ext)]
     for f in files:
@@ -396,12 +394,21 @@ def main():
     find_rtl_ext()
 
     # Find all input files
-    call_graph = {'locals': {}, 'globals': {}}
+    call_graph = {'locals': {}, 'globals': {}, 'weak': {}}
     tu_list, manual_list = find_files()
 
     # Read the input files
     for tu in tu_list:
-        read_tu(tu, call_graph)
+        read_obj(tu, call_graph)  # This must be first
+        
+    for fxn in call_graph['weak'].values():
+        if fxn['name'] not in call_graph['globals'].keys():
+            call_graph['globals'][fxn['name']] = fxn
+
+    for tu in tu_list:
+        read_rtl(tu, call_graph)
+    for tu in tu_list:
+        read_su(tu, call_graph)
 
     # Read manual files
     for m in manual_list:
