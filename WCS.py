@@ -68,15 +68,15 @@ def read_obj(tu, call_graph):
                 # Check for multiple declarations
                 if s.name in call_graph['locals'] and tu in call_graph['locals'][s.name]:
                     raise Exception('Multiple declarations of {}'.format(s.name))
-            elif s.binding == 'WEAK':
-                if s.name in call_graph['weak']:
-                    raise Exception('Multiple declarations of {}'.format(s.name))
-                call_graph['weak'][s.name] = {'tu': tu, 'name': s.name, 'binding': s.binding}
 
                 if s.name not in call_graph['locals']:
                     call_graph['locals'][s.name] = {}
 
                 call_graph['locals'][s.name][tu] = {'tu': tu, 'name': s.name, 'binding': s.binding}
+            elif s.binding == 'WEAK':
+                if s.name in call_graph['weak']:
+                    raise Exception('Multiple declarations of {}'.format(s.name))
+                call_graph['weak'][s.name] = {'tu': tu, 'name': s.name, 'binding': s.binding}
             else:
                 raise Exception('Error Unknown Binding "{}" for symbol: {}'.format(s.binding, s.name))
 
@@ -350,7 +350,7 @@ def find_rtl_ext():
     for root, directories, filenames in os.walk('.'):
         for f in filenames:
             if (f.endswith(rtl_ext_end)):
-                rtl_ext = f[f.index("."):]
+                rtl_ext = f[f[:-len(rtl_ext_end)].rindex("."):]
                 print("rtl_ext = " + rtl_ext)
                 return
 
