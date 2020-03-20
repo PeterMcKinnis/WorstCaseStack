@@ -243,7 +243,7 @@ def resolve_all_calls(call_graph):
 
 
 def calc_all_wcs(call_graph):
-    def calc_wcs(fxn_dict2, call_graph1, parents):
+    def calc_wcs(fxn_dict2, parents):
         """
         Calculates the worst case stack for a fxn that is declared (or called from) in a given file.
         :param parents: This function gets called recursively through the call graph.  If a function has recursion the
@@ -271,9 +271,7 @@ def calc_all_wcs(call_graph):
         for call_dict in fxn_dict2['r_calls']:
 
             # Calculate the WCS for the called function
-            parents.append(fxn_dict2)
-            calc_wcs(call_dict, call_graph1, parents)
-            parents.pop()
+            calc_wcs(call_dict, parents + [fxn_dict2])
 
             # If the called function is unbounded, so is this function
             if call_dict['wcs'] == 'unbounded':
@@ -292,11 +290,11 @@ def calc_all_wcs(call_graph):
     # Loop through every global and local function
     # and resolve each call, save results in r_calls
     for fxn_dict in call_graph['globals'].values():
-        calc_wcs(fxn_dict, call_graph, [])
+        calc_wcs(fxn_dict, [])
 
     for l_dict in call_graph['locals'].values():
         for fxn_dict in l_dict.values():
-            calc_wcs(fxn_dict, call_graph, [])
+            calc_wcs(fxn_dict, [])
 
 
 def print_all_fxns(call_graph):
@@ -427,4 +425,5 @@ def main():
     print_all_fxns(call_graph)
 
 
-main()
+if __name__ == '__main__':
+    main()
