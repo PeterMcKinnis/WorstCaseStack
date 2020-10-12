@@ -1,6 +1,7 @@
 import re
 import pprint
 import os
+import platform
 from subprocess import check_output
 from optparse import OptionParser
 
@@ -12,7 +13,10 @@ dir = None # Working directory
 su_ext = '.su'
 obj_ext = '.o'
 manual_ext = '.msu'
-read_elf_path = "arm-none-eabi-readelf.exe" # You may need to enter the full path here
+if platform.system() == 'Windows':
+    read_elf_path = "arm-none-eabi-readelf.exe" # You may need to enter the full path here
+else:
+    read_elf_path = "arm-none-eabi-readelf" # You may need to enter the full path here
 stdout_encoding = "utf-8"  # System dependant
 
 
