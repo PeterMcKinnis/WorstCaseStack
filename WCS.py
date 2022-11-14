@@ -109,6 +109,10 @@ class CallGraph:
         :param self: a object used to store information about each function, results go here
         :param tu: the translation unit
         """
+    # Needs to be able to handle both cases, i.e.: 
+    #   c:\\userlibs\\gcc\\arm-none-eabi\\include\\assert.h:41:6:__assert_func	16	static
+    #   main.c:113:6:vAssertCalled	8	static
+    # Now Matches seven groups https://regex101.com/r/DsvQv6/7
 
         # Construct A Call Graph
         function = re.compile(r'^;; Function (.*) \((\S+), funcdef_no=\d+(, [a-z_]+=\d+)*\)( \([a-z ]+\))?$')
@@ -334,7 +338,7 @@ def read_symbols(file: str) -> List[Symbol]:
         #     #raise Exception(f'Mixed symbol sizes in \'{v}\' ')
         #     s2.size=int(v[2].split('x')[1],16)
         # else:
-         #    s2.size = int(v[2])
+        #     s2.size = int(v[2])
         s2.type = v[3]
         s2.binding = v[4]
         s2.name = v[7] if len(v) >= 8 else ""
