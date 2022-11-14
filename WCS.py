@@ -109,10 +109,6 @@ class CallGraph:
         :param self: a object used to store information about each function, results go here
         :param tu: the translation unit
         """
-    # Needs to be able to handle both cases, i.e.: 
-    #   c:\\userlibs\\gcc\\arm-none-eabi\\include\\assert.h:41:6:__assert_func	16	static
-    #   main.c:113:6:vAssertCalled	8	static
-    # Now Matches seven groups https://regex101.com/r/DsvQv6/7
 
         # Construct A Call Graph
         function = re.compile(r'^;; Function (.*) \((\S+), funcdef_no=\d+(, [a-z_]+=\d+)*\)( \([a-z ]+\))?$')
@@ -152,6 +148,10 @@ class CallGraph:
         :param tu: the translation unit
         :return:
         """
+    # Needs to be able to handle both cases, i.e.: 
+    #   c:\\userlibs\\gcc\\arm-none-eabi\\include\\assert.h:41:6:__assert_func	16	static
+    #   main.c:113:6:vAssertCalled	8	static
+    # Now Matches seven groups https://regex101.com/r/DsvQv6/7
 
         su_line = re.compile(r'^(([^\\]+\\)*[^:]*):([\d]+):([\d]+):(.+)\t(\d+)\t(\S+)$')
         i = 1
