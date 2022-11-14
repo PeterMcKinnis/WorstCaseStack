@@ -1,2 +1,0 @@
-my_lib.c:7:6:extern_prv_fxn1	8	static
-my_lib.c:12:13:prv_fxn1	1008	static
