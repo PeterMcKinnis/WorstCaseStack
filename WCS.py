@@ -187,7 +187,7 @@ def read_manual(file: str, call_graph) -> None:
 
     for line in open(file, "rt"):
         fxn, stack_sz = line.split()
-        if fxn in call_graph:
+        if fxn in call_graph['globals']:
             raise Exception(f"Redeclared Function {fxn}")
         call_graph['globals'][fxn] = {'wcs': int(stack_sz),
                                       'calls': set(),
@@ -195,6 +195,7 @@ def read_manual(file: str, call_graph) -> None:
                                       'local_stack': int(stack_sz),
                                       'is_manual': True,
                                       'name': fxn,
+                                      'demangledName': fxn,
                                       'tu': '#MANUAL',
                                       'binding': 'GLOBAL'}
 
@@ -311,7 +312,7 @@ def print_all_fxns(call_graph) -> None:
         else:
             unresolved_str = ''
 
-        print(row_format.format(fxn_dict2['tu'], fxn_dict2.get('demangledName', ""), stack, unresolved_str))
+        print(row_format.format(fxn_dict2['tu'], fxn_dict2['demangledName'], stack, unresolved_str))
 
     def get_order(val) -> int:
         return 1 if val == 'unbounded' else -val
@@ -417,6 +418,7 @@ def main() -> None:
 
     # Print A Nice Message With Each Function and the WCS
     print_all_fxns(call_graph)
+
 
 if len(sys.argv) > 1:
     read_elf_path = sys.argv[1]
