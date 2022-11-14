@@ -8,7 +8,8 @@ on:
     branches: [ "master" ]
     
 jobs:
-  test:
+  nativeLinux:
+    name: Native Linux Test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -25,3 +26,18 @@ jobs:
         cd TestSrc
         make CC=gcc LDFLAGS=
         python ../WCS.py readelf
+  arm:
+    name: Arm cross compilation Test
+    runs-on: ubuntu-latest
+    container: dockcross/linux-armv7
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+    - name: Run simple test
+      run: |
+        cd TestSrc
+        make CC=${CC} LDFLAGS=
+        python ../WCS.py ${CROSS_COMPILE}readelf
