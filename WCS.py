@@ -1,34 +1,37 @@
+# pylint: disable = invalid-name, too-few-public-methods
+
 import re
 import pprint
 import os
+import sys
+from typing import List, Tuple
 from subprocess import check_output
-from optparse import OptionParser
 
 # Constants
 rtl_ext_end = ".dfinish"
-rtl_ext = None # e.g. '.c.270r.dfinish'. The number '270' will change with gcc version and is auto-detected by the
-               # function find_rtl_ext
-dir = None # Working directory
 su_ext = '.su'
 obj_ext = '.o'
 manual_ext = '.msu'
-read_elf_path = "arm-none-eabi-readelf.exe" # You may need to enter the full path here
+read_elf_path = "arm-none-eabi-readelf.exe"  # You may need to enter the full path here
 stdout_encoding = "utf-8"  # System dependant
 
 
 class Printable:
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "<" + type(self).__name__ + "> " + pprint.pformat(vars(self), indent=4, width=1)
 
 
 class Symbol(Printable):
-    pass
+    value: int = -1
+    size: int = -1
+    type: str = "uninitialized"
+    binding: str = "uninitialized"
+    name: str = "uninitialized"
 
 
-def read_symbols(file):
-    from subprocess import check_output
+def read_symbols(file: str) -> List[Symbol]:
 
-    def to_symbol(read_elf_line):
+    def to_symbol(read_elf_line: str) -> Symbol:
         v = read_elf_line.split()
 
         s2 = Symbol()
@@ -36,10 +39,7 @@ def read_symbols(file):
         s2.size = int(v[2])
         s2.type = v[3]
         s2.binding = v[4]
-        if len(v) >= 8:
-            s2.name = v[7]
-        else:
-            s2.name = ""
+        s2.name = v[7] if len(v) >= 8 else ""
 
         return s2
 
@@ -48,7 +48,7 @@ def read_symbols(file):
     return [to_symbol(line) for line in lines]
 
 
-def read_obj(tu, call_graph):
+def read_obj(tu: str, call_graph) -> None:
     """
     Reads the file tu.o and gets the binding (global or local) for each function
     :param tu: name of the translation unit (e.g. for main.c, this would be 'main')
@@ -62,12 +62,12 @@ def read_obj(tu, call_graph):
             if s.binding == 'GLOBAL':
                 # Check for multiple declarations
                 if s.name in call_graph['globals'] or s.name in call_graph['locals']:
-                    raise Exception('Multiple declarations of {}'.format(s.name))
+                    raise Exception(f'Multiple declarations of {s.name}')
                 call_graph['globals'][s.name] = {'tu': tu, 'name': s.name, 'binding': s.binding}
             elif s.binding == 'LOCAL':
                 # Check for multiple declarations
                 if s.name in call_graph['locals'] and tu in call_graph['locals'][s.name]:
-                    raise Exception('Multiple declarations of {}'.format(s.name))
+                    raise Exception(f'Multiple declarations of {s.name}')
 
                 if s.name not in call_graph['locals']:
                     call_graph['locals'][s.name] = {}
@@ -75,13 +75,13 @@ def read_obj(tu, call_graph):
                 call_graph['locals'][s.name][tu] = {'tu': tu, 'name': s.name, 'binding': s.binding}
             elif s.binding == 'WEAK':
                 if s.name in call_graph['weak']:
-                    raise Exception('Multiple declarations of {}'.format(s.name))
+                    raise Exception(f'Multiple declarations of {s.name}')
                 call_graph['weak'][s.name] = {'tu': tu, 'name': s.name, 'binding': s.binding}
             else:
-                raise Exception('Error Unknown Binding "{}" for symbol: {}'.format(s.binding, s.name))
+                raise Exception(f'Error Unknown Binding "{s.binding}" for symbol: {s.name}')
 
 
-def find_fxn(tu, fxn, call_graph):
+def find_fxn(tu: str, fxn: str, call_graph):
     """
     Looks up the dictionary associated with the function.
     :param tu: The translation unit in which to look for locals functions
@@ -92,14 +92,13 @@ def find_fxn(tu, fxn, call_graph):
 
     if fxn in call_graph['globals']:
         return call_graph['globals'][fxn]
-    else:
-        try:
-            return call_graph['locals'][fxn][tu]
-        except KeyError:
-            return None
+    try:
+        return call_graph['locals'][fxn][tu]
+    except KeyError:
+        return None
 
 
-def find_demangled_fxn(tu, fxn, call_graph):
+def find_demangled_fxn(tu: str, fxn: str, call_graph):
     """
     Looks up the dictionary associated with the function.
     :param tu: The translation unit in which to look for locals functions
@@ -119,7 +118,7 @@ def find_demangled_fxn(tu, fxn, call_graph):
     return None
 
 
-def read_rtl(tu, call_graph):
+def read_rtl(tu: str, call_graph, rtl_ext: str) -> None:
     """
     Read an RTL file and finds callees for each function and if there are calls via function pointer.
     :param tu: the translation unit
@@ -131,14 +130,14 @@ def read_rtl(tu, call_graph):
     static_call = re.compile(r'^.*\(call.*"(.*)".*$')
     other_call = re.compile(r'^.*call .*$')
 
-    for line_ in open(tu + rtl_ext).readlines():
+    for line_ in open(tu + rtl_ext, "rt"):
         m = function.match(line_)
         if m:
             fxn_name = m.group(2)
             fxn_dict2 = find_fxn(tu, fxn_name, call_graph)
             if not fxn_dict2:
                 pprint.pprint(call_graph)
-                raise Exception("Error locating function {} in {}".format(fxn_name, tu))
+                raise Exception(f"Error locating function {fxn_name} in {tu}")
 
             fxn_dict2['demangledName'] = m.group(1)
             fxn_dict2['calls'] = set()
@@ -157,7 +156,7 @@ def read_rtl(tu, call_graph):
             continue
 
 
-def read_su(tu, call_graph):
+def read_su(tu: str, call_graph) -> None:
     """
     Reads the 'local_stack' for each function.  Local stack ignores stack used by callees.
     :param tu: the translation unit
@@ -168,28 +167,28 @@ def read_su(tu, call_graph):
     su_line = re.compile(r'^([^ :]+):([\d]+):([\d]+):(.+)\t(\d+)\t(\S+)$')
     i = 1
 
-    for line in open(tu[0:tu.rindex(".")] + su_ext).readlines():
+    for line in open(tu[0:tu.rindex(".")] + su_ext, "rt"):
         m = su_line.match(line)
         if m:
             fxn = m.group(4)
             fxn_dict2 = find_demangled_fxn(tu, fxn, call_graph)
             fxn_dict2['local_stack'] = int(m.group(5))
         else:
-            print("error parsing line {} in file {}".format(i, tu))
+            print(f"error parsing line {i} in file {tu}")
         i += 1
 
 
-def read_manual(file, call_graph):
+def read_manual(file: str, call_graph) -> None:
     """
     reads the manual stack useage files.
     :param file: the file name
     :param call_graph: a object used to store information about each function, results go here
     """
 
-    for line in open(file).readlines():
+    for line in open(file, "rt"):
         fxn, stack_sz = line.split()
         if fxn in call_graph:
-            raise Exception("Redeclared Function {}".format(fxn))
+            raise Exception(f"Redeclared Function {fxn}")
         call_graph['globals'][fxn] = {'wcs': int(stack_sz),
                                       'calls': set(),
                                       'has_ptr_call': False,
@@ -200,7 +199,7 @@ def read_manual(file, call_graph):
                                       'binding': 'GLOBAL'}
 
 
-def validate_all_data(call_graph):
+def validate_all_data(call_graph) -> None:
     """
     Check that every entry in the call graph has the following fields:
     .calls, .has_ptr_call, .local_stack, .scope, .src_line
@@ -209,7 +208,7 @@ def validate_all_data(call_graph):
     def validate_dict(d):
         if not ('calls' in d and 'has_ptr_call' in d and 'local_stack' in d
                 and 'name' in d and 'tu' in d):
-            print("Error data is missing in fxn dictionary {}".format(d))
+            print(f"Error data is missing in fxn dictionary {d}")
 
     # Loop through every global and local function
     # and resolve each call, save results in r_calls
@@ -220,7 +219,8 @@ def validate_all_data(call_graph):
         for fxn_dict2 in l_dict.values():
             validate_dict(fxn_dict2)
 
-def resolve_all_calls(call_graph):
+
+def resolve_all_calls(call_graph) -> None:
     def resolve_calls(fxn_dict2):
         fxn_dict2['r_calls'] = []
         fxn_dict2['unresolved_calls'] = set()
@@ -242,8 +242,8 @@ def resolve_all_calls(call_graph):
             resolve_calls(fxn_dict)
 
 
-def calc_all_wcs(call_graph):
-    def calc_wcs(fxn_dict2, call_graph1, parents):
+def calc_all_wcs(call_graph) -> None:
+    def calc_wcs(fxn_dict2, call_graph1, parents) -> None:
         """
         Calculates the worst case stack for a fxn that is declared (or called from) in a given file.
         :param parents: This function gets called recursively through the call graph.  If a function has recursion the
@@ -299,25 +299,22 @@ def calc_all_wcs(call_graph):
             calc_wcs(fxn_dict, call_graph, [])
 
 
-def print_all_fxns(call_graph):
+def print_all_fxns(call_graph) -> None:
 
-    def print_fxn(row_format, fxn_dict2):
+    def print_fxn(row_format: str, fxn_dict2) -> None:
         unresolved = fxn_dict2['unresolved_calls']
         stack = str(fxn_dict2['wcs'])
         if unresolved:
-            unresolved_str = '({})'.format(' ,'.join(unresolved))
+            unresolved_str = f"({' ,'.join(unresolved)})"
             if stack != 'unbounded':
                 stack = "unbounded:" + stack
         else:
             unresolved_str = ''
 
-        print(row_format.format(fxn_dict2['tu'], fxn_dict2['demangledName'], stack, unresolved_str))
+        print(row_format.format(fxn_dict2['tu'], fxn_dict2.get('demangledName', ""), stack, unresolved_str))
 
-    def get_order(val):
-        if val == 'unbounded':
-            return 1
-        else:
-            return -val
+    def get_order(val) -> int:
+        return 1 if val == 'unbounded' else -val
 
     # Loop through every global and local function
     # and resolve each call, save results in r_calls
@@ -332,8 +329,8 @@ def print_all_fxns(call_graph):
     d_list.sort(key=lambda item: get_order(item['wcs']))
 
     # Calculate table width
-    tu_width = max(max([len(d['tu']) for d in d_list]), 16)
-    name_width = max(max([len(d['name']) for d in d_list]), 13)
+    tu_width = max(max(len(d['tu']) for d in d_list), 16)
+    name_width = max(max(len(d['name']) for d in d_list), 13)
     row_format = "{:<" + str(tu_width + 2) + "}  {:<" + str(name_width + 2) + "}  {:>14}  {:<17}"
 
     # Print out the table
@@ -343,70 +340,65 @@ def print_all_fxns(call_graph):
         print_fxn(row_format, d)
 
 
-def find_rtl_ext():
+def find_rtl_ext() -> str:
     # Find the rtl_extension
-    global rtl_ext
-    
-    for root, directories, filenames in os.walk('.'):
+
+    for _, _, filenames in os.walk('.'):
         for f in filenames:
-            if (f.endswith(rtl_ext_end)):
+            if f.endswith(rtl_ext_end):
                 rtl_ext = f[f[:-len(rtl_ext_end)].rindex("."):]
                 print("rtl_ext = " + rtl_ext)
-                return
+                return rtl_ext
 
     print("Could not find any files ending with '.dfinish'.  Check that the script is being run from the correct "
           "directory.  Check that the code was compiled with the correct flags")
-    exit(-1)
+    sys.exit(-1)
 
 
-def find_files():
-    tu = []
-    manual = []
-    all_files = []
-    for root, directories, filenames in os.walk('.'):
+def find_files(rtl_ext: str) -> Tuple[List[str], List[str]]:
+    tu: List[str] = []
+    manual: List[str] = []
+    all_files: List[str] = []
+    for root, _, filenames in os.walk('.'):
         for filename in filenames:
-            all_files.append(os.path.join(root,filename))
-
-    files = [f for f in all_files if os.path.isfile(f) and f.endswith(rtl_ext)]
-    for f in files:
+            all_files.append(os.path.join(root, filename))
+    for f in [f for f in all_files if os.path.isfile(f) and f.endswith(rtl_ext)]:
         base = f[0:-len(rtl_ext)]
         short_base = base[0:base.rindex(".")]
         if short_base + su_ext in all_files and short_base + obj_ext in all_files:
             tu.append(base)
-            print('Reading: {}{}, {}{}, {}{}'.format(base, rtl_ext, short_base, su_ext, short_base, obj_ext))
+            print(f'Reading: {base}{rtl_ext}, {short_base}{su_ext}, {short_base}{obj_ext}')
 
-    files = [f for f in all_files if os.path.isfile(f) and f.endswith(manual_ext)]
-    for f in files:
+    for f in [f for f in all_files if os.path.isfile(f) and f.endswith(manual_ext)]:
         manual.append(f)
-        print('Reading: {}'.format(f))
+        print(f'Reading: {f}')
 
     # Print some diagnostic messages
     if not tu:
         print("Could not find any translation units to analyse")
-        exit(-1)
+        sys.exit(-1)
 
     return tu, manual
 
 
-def main():
-
+def main() -> None:
     # Find the appropriate RTL extension
-    find_rtl_ext()
+    rtl_ext = find_rtl_ext()
 
     # Find all input files
     call_graph = {'locals': {}, 'globals': {}, 'weak': {}}
-    tu_list, manual_list = find_files()
+    tu_list, manual_list = find_files(rtl_ext)
 
     # Read the input files
     for tu in tu_list:
         read_obj(tu, call_graph)  # This must be first
-        
+
     for fxn in call_graph['weak'].values():
-        if fxn['name'] not in call_graph['globals'].keys():
+        if fxn['name'] not in call_graph['globals']:
             call_graph['globals'][fxn['name']] = fxn
 
     for tu in tu_list:
-        read_rtl(tu, call_graph)
+        read_rtl(tu, call_graph, rtl_ext)
     for tu in tu_list:
         read_su(tu, call_graph)
 
