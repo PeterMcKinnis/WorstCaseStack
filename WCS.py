@@ -12,7 +12,7 @@ rtl_ext_end = ".dfinish"
 su_ext = '.su'
 obj_ext = '.o'
 manual_ext = '.msu'
-read_elf_path = "arm-none-eabi-readelf.exe"  # You may need to enter the full path here
+read_elf_path = os.getenv("CROSS_COMPILE", "") + "readelf"
 stdout_encoding = "utf-8"  # System dependant
 
 
@@ -419,8 +419,5 @@ def main() -> None:
     # Print A Nice Message With Each Function and the WCS
     call_graph.print_all_fxns()
 
-
-if len(sys.argv) > 1:
-    read_elf_path = sys.argv[1]
 
 main()

@@ -25,7 +25,7 @@ jobs:
       run: |
         cd TestSrc
         make CC=gcc LDFLAGS=
-        python ../WCS.py readelf
+        python ../WCS.py
   arm:
     name: Arm cross compilation Test
     runs-on: ubuntu-latest
@@ -40,4 +40,4 @@ jobs:
       run: |
         cd TestSrc
         make CC=${CC} LDFLAGS=
-        python ../WCS.py ${CROSS_COMPILE}readelf
+        python ../WCS.py
