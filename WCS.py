@@ -32,6 +32,51 @@ class Symbol(Printable):
 CallNode = Dict[str, Any]
 
 
+def calc_wcs(fxn_dict2: CallNode, parents: List[CallNode]) -> None:
+    """
+    Calculates the worst case stack for a fxn that is declared (or called from) in a given file.
+    :param parents: This function gets called recursively through the call graph.  If a function has recursion the
+    tuple file, fxn will be in the parents stack and everything between the top of the stack and the matching entry
+    has recursion.
+    :return:
+    """
+
+    # If the wcs is already known, then nothing to do
+    if 'wcs' in fxn_dict2:
+        return
+
+    # Check for pointer calls
+    if fxn_dict2['has_ptr_call']:
+        fxn_dict2['wcs'] = 'unbounded'
+        return
+
+    # Check for recursion
+    if fxn_dict2 in parents:
+        fxn_dict2['wcs'] = 'unbounded'
+        return
+
+    # Calculate WCS
+    call_max = 0
+    for call_dict in fxn_dict2['r_calls']:
+
+        # Calculate the WCS for the called function
+        calc_wcs(call_dict, parents + [fxn_dict2])
+
+        # If the called function is unbounded, so is this function
+        if call_dict['wcs'] == 'unbounded':
+            fxn_dict2['wcs'] = 'unbounded'
+            return
+
+        # Keep track of the call with the largest stack use
+        call_max = max(call_max, call_dict['wcs'])
+
+        # Propagate Unresolved Calls
+        for unresolved_call in call_dict['unresolved_calls']:
+            fxn_dict2['unresolved_calls'].add(unresolved_call)
+
+    fxn_dict2['wcs'] = call_max + fxn_dict2['local_stack']
+
+
 class CallGraph:
     globals: Dict[str, CallNode] = {}
     locals: Dict[str, Dict[str, CallNode]] = {}
@@ -226,61 +271,15 @@ class CallGraph:
             for fxn_dict in l_dict.values():
                 resolve_calls(fxn_dict)
 
-    def _calc_wcs(self, fxn_dict2: CallNode, parents: List[CallNode]) -> None:
-        """
-        Calculates the worst case stack for a fxn that is declared (or called from) in a given file.
-        :param parents: This function gets called recursively through the call graph.  If a function has recursion the
-        tuple file, fxn will be in the parents stack and everything between the top of the stack and the matching entry
-        has recursion.
-        :return:
-        """
-
-        # If the wcs is already known, then nothing to do
-        if 'wcs' in fxn_dict2:
-            return
-
-        # Check for pointer calls
-        if fxn_dict2['has_ptr_call']:
-            fxn_dict2['wcs'] = 'unbounded'
-            return
-
-        # Check for recursion
-        if fxn_dict2 in parents:
-            fxn_dict2['wcs'] = 'unbounded'
-            return
-
-        # Calculate WCS
-        call_max = 0
-        for call_dict in fxn_dict2['r_calls']:
-
-            # Calculate the WCS for the called function
-            parents.append(fxn_dict2)
-            self._calc_wcs(call_dict, parents)
-            parents.pop()
-
-            # If the called function is unbounded, so is this function
-            if call_dict['wcs'] == 'unbounded':
-                fxn_dict2['wcs'] = 'unbounded'
-                return
-
-            # Keep track of the call with the largest stack use
-            call_max = max(call_max, call_dict['wcs'])
-
-            # Propagate Unresolved Calls
-            for unresolved_call in call_dict['unresolved_calls']:
-                fxn_dict2['unresolved_calls'].add(unresolved_call)
-
-        fxn_dict2['wcs'] = call_max + fxn_dict2['local_stack']
-
     def calc_all_wcs(self) -> None:
         # Loop through every global and local function
         # and resolve each call, save results in r_calls
         for fxn_dict in self.globals.values():
-            self._calc_wcs(fxn_dict, [])
+            calc_wcs(fxn_dict, [])
 
         for l_dict in self.locals.values():
             for fxn_dict in l_dict.values():
-                self._calc_wcs(fxn_dict, [])
+                calc_wcs(fxn_dict, [])
 
     def print_all_fxns(self) -> None:
 
