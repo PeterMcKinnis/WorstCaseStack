@@ -151,18 +151,18 @@ class CallGraph:
     # Needs to be able to handle both cases, i.e.: 
     #   c:\\userlibs\\gcc\\arm-none-eabi\\include\\assert.h:41:6:__assert_func	16	static
     #   main.c:113:6:vAssertCalled	8	static
-    # Now Matches seven groups https://regex101.com/r/DsvQv6/7
+    # Now Matches six groups https://regex101.com/r/Imi0sq/1
 
-        su_line = re.compile(r'^(([^\\]+\\)*[^:]*):([\d]+):([\d]+):(.+)\t(\d+)\t(\S+)$')
+        su_line = re.compile(r'^(.+):(\d+):(\d+):(.+)\t(\d+)\t(\S+)$')
         i = 1
 
         with open(tu[0:tu.rindex(".")] + su_ext, "rt", encoding="latin_1") as file_:
             for line in file_:
                 m = su_line.match(line)
                 if m:
-                    fxn = m.group(5)
+                    fxn = m.group(4)
                     fxn_dict2 = self.find_demangled_fxn(tu, fxn)
-                    fxn_dict2['local_stack'] = int(m.group(6))
+                    fxn_dict2['local_stack'] = int(m.group(5))
                 else:
                     print(f"error parsing line {i} in file {tu}")
                 i += 1
