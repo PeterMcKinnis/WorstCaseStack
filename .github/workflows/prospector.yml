@@ -21,4 +21,4 @@ jobs:
         python -m pip install prospector[with_mypy] prospector[with_vulture]
         python -m pip install -r requirements.txt
     - name: Analysing the code with prospector
-      run: prospector  --with-tool vulture  --with-tool mypy --strictness veryhigh --max-line-length 200 *.py
+      run: prospector  --with-tool vulture  --with-tool mypy --strictness veryhigh --max-line-length 200 *.py -X
