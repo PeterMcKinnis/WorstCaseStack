@@ -193,8 +193,12 @@ class CallGraph:
         :param tu: the translation unit
         :return:
         """
+    # Needs to be able to handle both cases, i.e.: 
+    #   c:\\userlibs\\gcc\\arm-none-eabi\\include\\assert.h:41:6:__assert_func	16	static
+    #   main.c:113:6:vAssertCalled	8	static
+    # Now Matches six groups https://regex101.com/r/Imi0sq/1
 
-        su_line = re.compile(r'^([^ :]+):([\d]+):([\d]+):(.+)\t(\d+)\t(\S+)$')
+        su_line = re.compile(r'^(.+):(\d+):(\d+):(.+)\t(\d+)\t(\S+)$')
         i = 1
 
         with open(tu[0:tu.rindex(".")] + su_ext, "rt", encoding="latin_1") as file_:
@@ -329,13 +333,18 @@ def read_symbols(file: str) -> List[Symbol]:
 
         s2 = Symbol()
         # s2.value = int(v[1], 16)
-        # s2.size = int(v[2])
+        # if ('x' in v[2]):
+        #     #raise Exception(f'Mixed symbol sizes in \'{v}\' ')
+        #     s2.size=int(v[2].split('x')[1],16)
+        # else:
+        #     s2.size = int(v[2])
         s2.type = v[3]
         s2.binding = v[4]
         s2.name = v[7] if len(v) >= 8 else ""
 
         return s2
-
+#TODO  Error at line36 caused by mixing decimal and hex output when length is long. 
+# but ModusTB version GNU readelf (GNU Arm Embedded Toolchain 10.3-2021.07) 2.36.1.20210621 does not support flag to prevent that.  "--sym-base=10"
     output = check_output([read_elf_path, "-s", "-W", file]).decode(stdout_encoding)
     lines = output.splitlines()[3:]
     return [to_symbol(line) for line in lines]
