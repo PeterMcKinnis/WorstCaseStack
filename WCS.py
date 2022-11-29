@@ -193,7 +193,7 @@ class CallGraph:
         :param tu: the translation unit
         :return:
         """
-    # Needs to be able to handle both cases, i.e.: 
+    # Needs to be able to handle both cases, i.e.:
     #   c:\\userlibs\\gcc\\arm-none-eabi\\include\\assert.h:41:6:__assert_func	16	static
     #   main.c:113:6:vAssertCalled	8	static
     # Now Matches six groups https://regex101.com/r/Imi0sq/1
@@ -343,8 +343,6 @@ def read_symbols(file: str) -> List[Symbol]:
         s2.name = v[7] if len(v) >= 8 else ""
 
         return s2
-#TODO  Error at line36 caused by mixing decimal and hex output when length is long. 
-# but ModusTB version GNU readelf (GNU Arm Embedded Toolchain 10.3-2021.07) 2.36.1.20210621 does not support flag to prevent that.  "--sym-base=10"
     output = check_output([read_elf_path, "-s", "-W", file]).decode(stdout_encoding)
     lines = output.splitlines()[3:]
     return [to_symbol(line) for line in lines]
